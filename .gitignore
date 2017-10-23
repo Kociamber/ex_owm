@@ -18,3 +18,9 @@ erl_crash.dump
 
 # Also ignore archive artifacts (built via "mix archive.build").
 *.ez
+
+# secret stuff
+config/dev.secret.ex
+
+# OS X stuff
+.DS_store
