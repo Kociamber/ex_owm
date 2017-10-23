@@ -20,7 +20,7 @@ erl_crash.dump
 *.ez
 
 # secret stuff
-config/dev.secret.ex
+config/dev.secret.exs
 
 # OS X stuff
 .DS_store
