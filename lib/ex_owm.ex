@@ -18,7 +18,7 @@ defmodule ExOwm do
   ## Examples
 
       iex> WeatherEx.temperature_of("Warsaw")
-      :world
+      %{}
 
   """
   def get_weather(location) do
