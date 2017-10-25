@@ -21,6 +21,11 @@ erl_crash.dump
 
 # secret stuff
 config/dev.secret.exs
+config/test.secret.exs
+config/prod.secret.exs
+
+# dev notes
+devnotes.md
 
 # OS X stuff
 .DS_store

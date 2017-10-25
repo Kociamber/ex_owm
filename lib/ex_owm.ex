@@ -17,12 +17,12 @@ defmodule ExOwm do
 
   ## Examples
 
-      iex> WeatherEx.temperature_of("Warsaw")
-      :world
+      iex> ExOwm.get_weather("Warsaw")
+      %{}
 
   """
-  def get_weather(location) do
-    location
+  def get_weather(locations) do
+    locations
     |> send_request()
     |> parse_request()
   end

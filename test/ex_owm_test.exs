@@ -2,7 +2,12 @@ defmodule ExOwmTest do
   use ExUnit.Case
   doctest ExOwm
 
-  test "greets the world" do
-    assert ExOwm.hello() == :world
+  test ": can get temperature for a given location" do
+    # given
+    location = "Warsaw"
+    # when
+    result = ExOwm.get_weather(location)
+    # then
+    assert is_map(result)
   end
 end
