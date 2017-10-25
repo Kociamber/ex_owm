@@ -1,4 +1,6 @@
 defmodule ExOwm do
+  use Application
+  alias ExOwm.Worker
   @moduledoc """
   Documentation for ExOwm.
   """
@@ -21,29 +23,13 @@ defmodule ExOwm do
       %{}
 
   """
-  def get_weather(locations) do
-    locations
-    |> send_request()
-    |> parse_request()
+  def get_weather_by_id(locations) when is_list(locations) do
+    Enum.each(locations, fn location -> Worker.start_link(%{id: location}) end)
+    ExOwm.Coordinator.get_state()
   end
 
-  defp send_request(location) do
-    api_url = "api.openweathermap.org/data/2.5/weather?q=#{location}&units=metric&APPID=#{Application.get_env(:ex_owm, :api_key)}"
-    case HTTPoison.get(api_url) do
-      {:ok, %HTTPoison.Response{status_code: 200, body: json_body}} ->
-        {:ok, json_body}
-      {:ok, %HTTPoison.Response{status_code: 404}} ->
-        {:ok, :not_found}
-      {:ok, %HTTPoison.Response{status_code: 400}} ->
-        {:ok, :empty_location}  
-    end
+  def start(_type, _args) do
+    ExOwm.Supervisor.start_link()
   end
 
-  defp parse_request(location) do
-    case location do
-      {:ok, json_body} ->
-        {:ok, weather_map} = Poison.decode(json_body)
-        weather_map
-    end
-  end
 end
