@@ -1,16 +1,15 @@
 defmodule ExOwm.Supervisor do
   use Supervisor
 
-  def start_link() do
-    Supervisor.start_link(__MODULE__, :ok)
+  def start_link do
+    Supervisor.start_link(__MODULE__, [])
   end
 
-  def init(:ok) do
+  def init(_) do
     children = [
-      ExOwm.Coordinator
-      #ExOwm.Worker
+      supervisor(ExOwm.Feature.Supervisor, [])
     ]
 
-    Supervisor.init(children, strategy: :one_for_one)
+    supervise(children, strategy: :one_for_one)
   end
 end

@@ -1,6 +1,8 @@
 defmodule ExOwm do
   use Application
-  alias ExOwm.Worker
+  alias ExOwm.Supervisor, as: MainSupervisor
+  alias ExOwm.Feature.Supervisor, as: FeatureSupervisor
+  alias ExOwm.Feature.Coordinator
   @moduledoc """
   Documentation for ExOwm.
   """
@@ -24,12 +26,15 @@ defmodule ExOwm do
 
   """
   def get_weather_by_id(locations) when is_list(locations) do
-    Enum.each(locations, fn location -> Worker.start_link(%{id: location}) end)
-    ExOwm.Coordinator.get_state()
+    Enum.each(locations, fn(location) -> 
+      # IO.inspect location
+      FeatureSupervisor.start_worker(%{id: location}) 
+    end)
+    Coordinator.get_state()
   end
 
   def start(_type, _args) do
-    ExOwm.Supervisor.start_link()
+    MainSupervisor.start_link()
   end
 
 end

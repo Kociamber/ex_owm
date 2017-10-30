@@ -1,4 +1,4 @@
-defmodule ExOwm.Api do
+defmodule ExOwm.Feature.Api do
 
   def call_owm_api(params) do
     params
@@ -8,7 +8,12 @@ defmodule ExOwm.Api do
   end
 
   defp build_request_string(params) do
-    id = Map.get(params, :id)
+    id = 
+      params
+      |> List.first()
+      |> Map.get(:id)
+    IO.puts "+++++++++"
+    IO.inspect params
     "api.openweathermap.org/data/2.5/weather?id=#{id}&units=metric&APPID=#{Application.get_env(:ex_owm, :api_key)}"
   end
 

@@ -1,8 +1,8 @@
-defmodule ExOwm.Coordinator do
+defmodule ExOwm.Feature.Coordinator do
   use GenServer
 
 ## Client API
-  def start_link(opts \\ []) do
+  def start_link([:calling_coordinator]) do
     GenServer.start_link(__MODULE__, :ok, name: :exowm_coordinator)
   end
 
