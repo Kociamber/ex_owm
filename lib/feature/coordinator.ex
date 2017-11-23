@@ -11,10 +11,6 @@ defmodule ExOwm.Feature.Coordinator do
     GenServer.call(:exowm_coordinator, {:get_state})
   end
 
-  def set_location_weather(location_weather) do
-    GenServer.cast(:exowm_coordinator, {:set_location_weather, location_weather})
-  end
-
   def start_workers(locations) do
     # {:reply, results, _state} = GenServer.call(:exowm_coordinator, {:start_workers, locations})
     GenServer.call(:exowm_coordinator, {:start_workers, locations})
@@ -35,9 +31,4 @@ defmodule ExOwm.Feature.Coordinator do
     results = Enum.map(worker_tasks, fn(task) -> Task.await(task) end)
     {:reply, results, results}
   end
-
-  def handle_cast({:set_location_weather, location_weather}, state) do
-    {:noreply, [location_weather | state]}
-  end
-
 end

@@ -17,20 +17,16 @@ defmodule ExOwm do
   end
 
   @doc """
-  Gets temperature of the given city by calling api.openweathermap.org
+  Gets temperature of the given location by openweathermap id.
 
   ## Examples
 
-      iex> ExOwm.get_weather("Warsaw")
+      iex> ExOwm.get_weather_by_id([1,2,3,4,5])
       %{}
 
   """
   def get_weather_by_id(locations) when is_list(locations) do
-    # Enum.each(locations, fn(location) -> 
-      # IO.inspect location
-      # ExOwm.Feature.Supervisor.start_workers(%{id: location}) 
     ExOwm.Feature.Coordinator.start_workers(locations)
-    # end)
     ExOwm.Feature.Coordinator.get_state()
   end
 
