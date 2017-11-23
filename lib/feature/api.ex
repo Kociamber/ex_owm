@@ -7,13 +7,7 @@ defmodule ExOwm.Feature.Api do
     |> parse_json()
   end
 
-  defp build_request_string(params) do
-    id = 
-      params
-      |> List.first()
-      |> Map.get(:id)
-    IO.puts "+++++++++"
-    IO.inspect params
+  defp build_request_string(id) do
     "api.openweathermap.org/data/2.5/weather?id=#{id}&units=metric&APPID=#{Application.get_env(:ex_owm, :api_key)}"
   end
 

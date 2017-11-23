@@ -1,23 +1,23 @@
 defmodule ExOwm do
+  require Logger
   use Application
-  alias ExOwm.Supervisor, as: MainSupervisor
-  alias ExOwm.Feature.Supervisor, as: FeatureSupervisor
-  alias ExOwm.Feature.Coordinator
   @moduledoc """
-  Documentation for ExOwm.
+  Documentation for ExOwm, OpenWeatherMap API Elixir library.
   """
+
+  def start(_type, _args) do
+    import Supervisor.Spec
+    Logger.info "Starting supervision tree for #{inspect(__MODULE__)}"
+
+    children = [
+      supervisor(ExOwm.Feature.Supervisor, [])
+    ]
+
+    Supervisor.start_link(children, strategy: :one_for_one)
+  end
 
   @doc """
   Gets temperature of the given city by calling api.openweathermap.org
-
-  ## Example API calls by city name
-  api.openweathermap.org/data/2.5/weather?q={city name}&APPID={APIKEY}
-  api.openweathermap.org/data/2.5/weather?q={city name},{country code}&units=metric&APPID={APIKEY}
-
-  ## Example API calls by city ID
-  api.openweathermap.org/data/2.5/weather?id=2172797&APPID={APIKEY}
-
-  ## Full parameter list: http://openweathermap.org/current#format
 
   ## Examples
 
@@ -26,15 +26,12 @@ defmodule ExOwm do
 
   """
   def get_weather_by_id(locations) when is_list(locations) do
-    Enum.each(locations, fn(location) -> 
+    # Enum.each(locations, fn(location) -> 
       # IO.inspect location
-      FeatureSupervisor.start_worker(%{id: location}) 
-    end)
-    Coordinator.get_state()
-  end
-
-  def start(_type, _args) do
-    MainSupervisor.start_link()
+      # ExOwm.Feature.Supervisor.start_workers(%{id: location}) 
+    ExOwm.Feature.Coordinator.start_workers(locations)
+    # end)
+    ExOwm.Feature.Coordinator.get_state()
   end
 
 end
