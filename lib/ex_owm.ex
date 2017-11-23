@@ -1,4 +1,5 @@
 defmodule ExOwm do
+  alias ExOwm.Feature.Coordinator
   require Logger
   use Application
   @moduledoc """
@@ -17,17 +18,18 @@ defmodule ExOwm do
   end
 
   @doc """
-  Gets temperature of the given location by openweathermap id.
+  Gets weather data of the given location with specified options.
 
   ## Examples
 
-      iex> ExOwm.get_weather_by_id([1,2,3,4,5])
+      iex> ExOwm.current_weather_data(["Warsaw,PL",23212,3332674,"London",5], units: :metric, lang: :pl)
       %{}
 
   """
-  def get_weather_by_id(locations) when is_list(locations) do
-    ExOwm.Feature.Coordinator.start_workers(locations)
-    ExOwm.Feature.Coordinator.get_state()
+  @spec current_weather_data(list, list) :: map
+  def current_weather_data(locations, opts \\ []) when is_list(locations) do
+    Coordinator.start_workers(locations, opts)
+    Coordinator.get_state()
   end
 
 end

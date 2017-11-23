@@ -1,7 +1,7 @@
 defmodule ExOwm.Feature.Worker do
-  alias ExOwm.Feature.Api
+  alias ExOwm.Feature.ApiCaller
   
-  def run(location) do
-    Api.call_owm_api(location)
+  def run(location, opts) do
+    ApiCaller.send_and_parse_request(location, opts)
   end
 end
