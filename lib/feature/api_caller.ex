@@ -7,7 +7,7 @@ defmodule ExOwm.Feature.ApiCaller do
     |> parse_json()
   end
 
-  def build_request({location, opts}) do
+  defp build_request({location, opts}) do
     {location, opts}
     |> add_prefix_substring()
     |> add_location_substring()

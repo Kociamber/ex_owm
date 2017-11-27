@@ -1,7 +1,6 @@
 defmodule ExOwm.Feature.Supervisor do
   use Supervisor
   alias ExOwm.Feature.Coordinator
-  # alias ExOwm.Feature.Worker
 
   ## Client API
   def start_link(options \\ []) do

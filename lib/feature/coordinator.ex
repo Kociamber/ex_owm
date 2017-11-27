@@ -12,13 +12,12 @@ defmodule ExOwm.Feature.Coordinator do
   end
 
   def start_workers(locations, opts) do
-    # {:reply, results, _state} = GenServer.call(:exowm_coordinator, {:start_workers, locations})
     GenServer.call(:exowm_coordinator, {:start_workers, locations, opts})
-    # results
   end
 
   ## Server implementation
   def init(_) do
+    :ets.new(:exowm_cache, [:named_table, :public, read_concurrency: true, write_concurrency: true])
     {:ok, %{}}
   end
 
