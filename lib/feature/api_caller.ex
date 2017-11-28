@@ -1,5 +1,9 @@
 defmodule ExOwm.Feature.ApiCaller do
 
+  # @todo:
+  # 1. Add validation for add_prefix_substring/2 params.
+  # 2. Merge send_and_parse_request/2 and build_request/2 into single pipeline.
+
   def send_and_parse_request(location, opts) do
     {location, opts}
     |> build_request()
@@ -16,10 +20,6 @@ defmodule ExOwm.Feature.ApiCaller do
     |> add_api_key_substring()
   end
 
-  # defp build_request_string(id) do
-  #   "api.openweathermap.org/data/2.5/weather?id=#{id}&units=metric&APPID=#{Application.get_env(:ex_owm, :api_key)}"
-  # end
-
   # Start building querys string.
   defp add_prefix_substring({location, opts}) do
     {"api.openweathermap.org/data/2.5/weather", location, opts}
@@ -30,10 +30,11 @@ defmodule ExOwm.Feature.ApiCaller do
     cond do
       is_binary(location)  -> {string <> "?q=#{location}", opts}
       is_integer(location) -> {string <> "?id=#{location}", opts}
+      is_map(location)     -> {string <> "lat=#{Map.get(location, :lat)}&lon=#{Map.get(location, :lon)}", opts}
     end
   end
 
-  # Add temperature type to query string. Lack of this part make api to return default 
+  # Add temperature type to query string. Lack of this part make api to return default
   # temperature in Kelvins.
   defp add_units_substring({string, opts}) do
     case Keyword.get(opts, :units) do

@@ -3,7 +3,7 @@ defmodule ExOwm do
   require Logger
   use Application
   @moduledoc """
-  Documentation for ExOwm, OpenWeatherMap API Elixir library.
+  Documentation for ExOwm, OpenWeatherMap API Elixir client.
   """
 
   def start(_type, _args) do
@@ -26,8 +26,8 @@ defmodule ExOwm do
       %{}
 
   """
-  @spec current_weather_data(list, list) :: map
-  def current_weather_data(locations, opts \\ []) when is_list(locations) do
+  @spec get_current_weather_data(list, list) :: map
+  def get_current_weather_data(locations, opts \\ []) when is_list(locations) do
     Coordinator.start_workers(locations, opts)
     Coordinator.get_state()
   end
