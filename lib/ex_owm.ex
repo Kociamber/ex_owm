@@ -20,7 +20,7 @@ defmodule ExOwm do
   @typedoc """
   Current weather data API request.
   """
-  @typep request :: 
+  @type request ::
     %{city: String.t} | %{city: String.t, country_code: String.t} |
     %{id: integer()} | 
     %{lat: float(), lon: float()} |
@@ -29,27 +29,27 @@ defmodule ExOwm do
   @typedoc """
   Current weather data API requests.
   """
-  @typep requests :: [request]
+  @type requests :: [request]
 
   @typedoc """
   Current weather data API call available options.
   """
-  @typep option :: :format | :units | :lang
+  @type option :: :format | :units | :lang
 
   @typedoc """
   Keyword list of options
   """
-  @typep options :: [option: term]
+  @type options :: [option: term]
 
   @doc """
   Gets weather data of the given location with specified options.
 
   ## Examples
 
-      iex> ExOwm.get_current_weather_data([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl)
-      %{}
-      iex> ExOwm.get_current_weather_data([%{id: 2759794}], units: :metric, lang: :nl)
-      %{}
+      iex> is_list ExOwm.get_current_weather_data([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl)
+      true 
+      iex> is_list ExOwm.get_current_weather_data([%{id: 2759794}], units: :metric, lang: :nl)
+      true
 
   """
   @spec get_current_weather_data([request], options) :: map
