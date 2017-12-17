@@ -33,7 +33,7 @@ defmodule ExOwm.Feature.ApiCaller do
   defp add_location_substring({string, %{id: id}, opts}), 
     do: {string <> "?id=#{id}", opts}
   defp add_location_substring({string, %{lat: lat, lon: lon}, opts}), 
-    do: {string <> "lat=#{lat}&lon=#{lon}", opts}
+    do: {string <> "?lat=#{lat}&lon=#{lon}", opts}
   defp add_location_substring({string, %{zip: zip, country_code: country_code}, opts}), 
     do: {string <> "?zip=#{zip},#{country_code}", opts}
 
