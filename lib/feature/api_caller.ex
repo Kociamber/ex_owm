@@ -26,13 +26,16 @@ defmodule ExOwm.Feature.ApiCaller do
   end
 
   # Add location type to query string.
-  defp add_location_substring({string, location, opts}) do
-    cond do
-      is_binary(location)  -> {string <> "?q=#{location}", opts}
-      is_integer(location) -> {string <> "?id=#{location}", opts}
-      is_map(location)     -> {string <> "lat=#{Map.get(location, :lat)}&lon=#{Map.get(location, :lon)}", opts}
-    end
-  end
+  defp add_location_substring({string, %{city: city}, opts}), 
+    do: {string <> "?q=#{city}", opts}
+  defp add_location_substring({string, %{city: city, country_code: country_code}, opts}), 
+    do: {string <> "?q=#{city},#{country_code}", opts}
+  defp add_location_substring({string, %{id: id}, opts}), 
+    do: {string <> "?id=#{id}", opts}
+  defp add_location_substring({string, %{lat: lat, lon: lon}, opts}), 
+    do: {string <> "lat=#{lat}&lon=#{lon}", opts}
+  defp add_location_substring({string, %{zip: zip, country_code: country_code}, opts}), 
+    do: {string <> "?zip=#{zip},#{country_code}", opts}
 
   # Add temperature type to query string. Lack of this part make api to return default
   # temperature in Kelvins.
