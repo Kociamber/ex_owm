@@ -26,15 +26,19 @@ defmodule ExOwm.Feature.ApiCaller do
   end
 
   # Add location type to query string.
-  defp add_location_substring({string, %{city: city}, opts}), 
+  defp add_location_substring({string, %{city: city}, opts}),
     do: {string <> "?q=#{city}", opts}
-  defp add_location_substring({string, %{city: city, country_code: country_code}, opts}), 
+
+  defp add_location_substring({string, %{city: city, country_code: country_code}, opts}),
     do: {string <> "?q=#{city},#{country_code}", opts}
-  defp add_location_substring({string, %{id: id}, opts}), 
+
+  defp add_location_substring({string, %{id: id}, opts}),
     do: {string <> "?id=#{id}", opts}
-  defp add_location_substring({string, %{lat: lat, lon: lon}, opts}), 
+
+  defp add_location_substring({string, %{lat: lat, lon: lon}, opts}),
     do: {string <> "?lat=#{lat}&lon=#{lon}", opts}
-  defp add_location_substring({string, %{zip: zip, country_code: country_code}, opts}), 
+
+  defp add_location_substring({string, %{zip: zip, country_code: country_code}, opts}),
     do: {string <> "?zip=#{zip},#{country_code}", opts}
 
   # Add temperature type to query string. Lack of this part make api to return default
@@ -68,7 +72,7 @@ defmodule ExOwm.Feature.ApiCaller do
       {:ok, %HTTPoison.Response{status_code: 404}} ->
         {:error, :not_found}
       {:ok, %HTTPoison.Response{status_code: 400}} ->
-        {:error, :not_found}  
+        {:error, :not_found}
     end
   end
 
@@ -76,7 +80,7 @@ defmodule ExOwm.Feature.ApiCaller do
     {:ok, map} = Poison.decode(json)
     map
   end
-  defp parse_json({:error, reason}) do 
+  defp parse_json({:error, reason}) do
     {:error, reason}
   end
 end
