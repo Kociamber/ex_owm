@@ -15,7 +15,7 @@ defmodule ExOwm.Mixfile do
   def application do
     [
       extra_applications: [:logger],
-      mod: {ExOwm, []}
+      mod: {ExOwm.Application, []}
     ]
   end
 
