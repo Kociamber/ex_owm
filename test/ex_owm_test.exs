@@ -37,7 +37,6 @@ defmodule ExOwmTest do
     city = %{id: 2759794}
     # when
     result = ExOwm.get_current_weather_data([city])
-        :timer.sleep(1000)
     # then
     # check whether a list of maps is returned
     assert is_list(result)
