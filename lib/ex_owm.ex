@@ -45,5 +45,4 @@ defmodule ExOwm do
     Coordinator.start_workers(locations, opts)
     Coordinator.get_state()
   end
-
 end

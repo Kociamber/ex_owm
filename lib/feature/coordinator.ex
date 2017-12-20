@@ -17,7 +17,6 @@ defmodule ExOwm.Feature.Coordinator do
 
   ## Server implementation
   def init(_) do
-    :ets.new(:exowm_cache, [:named_table, :public, read_concurrency: true, write_concurrency: true])
     {:ok, %{}}
   end
 

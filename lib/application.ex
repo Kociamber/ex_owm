@@ -10,7 +10,7 @@ defmodule ExOwm.Application do
 
     children = [
       supervisor(ExOwm.Feature.Supervisor, []),
-      supervisor(ExOwm.Cache, [])
+      supervisor(ExOwm.Feature.Cache, [])
     ]
 
     Supervisor.start_link(children, strategy: :one_for_one)

@@ -2,7 +2,7 @@
 use Mix.Config
 config :logger, level: :info
 
-config :ex_owm, ExOwm.Cache,
+config :ex_owm, ExOwm.Feature.Cache,
   adapter: Nebulex.Adapters.Local,
   n_shards: 2,
   gc_interval: 3600
