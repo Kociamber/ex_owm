@@ -1,17 +1,9 @@
-defmodule ExOwm.Feature.ApiCaller do
+defmodule ExOwm.RequestString.CurrentWeather do
 
   # @todo:
   # 1. Add validation for add_prefix_substring/2 params.
-  # 2. Merge send_and_parse_request/2 and build_request/2 into single pipeline.
 
-  def send_and_parse_request(location, opts) do
-    {location, opts}
-    |> build_request()
-    |> call_api()
-    |> parse_json()
-  end
-
-  defp build_request({location, opts}) do
+  def build_request_string(location, opts) do
     {location, opts}
     |> add_prefix_substring()
     |> add_location_substring()
@@ -65,22 +57,4 @@ defmodule ExOwm.Feature.ApiCaller do
 
   defp add_api_key_substring(string), do: string <> "&APPID=#{Application.get_env(:ex_owm, :api_key)}"
 
-  defp call_api(string) do
-    case HTTPoison.get(string) do
-      {:ok, %HTTPoison.Response{status_code: 200, body: json_body}} ->
-        {:ok, json_body}
-      {:ok, %HTTPoison.Response{status_code: 404}} ->
-        {:error, :not_found}
-      {:ok, %HTTPoison.Response{status_code: 400}} ->
-        {:error, :not_found}
-    end
-  end
-
-  defp parse_json({:ok, json}) do
-    {:ok, map} = Poison.decode(json)
-    map
-  end
-  defp parse_json({:error, reason}) do
-    {:error, reason}
-  end
 end

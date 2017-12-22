@@ -9,8 +9,8 @@ defmodule ExOwm.Application do
     Logger.info "Starting supervision tree for #{inspect(__MODULE__)}"
 
     children = [
-      supervisor(ExOwm.Feature.Supervisor, []),
-      supervisor(ExOwm.Feature.Cache, [])
+      supervisor(ExOwm.Supervisor, []),
+      supervisor(ExOwm.Cache, [])
     ]
 
     Supervisor.start_link(children, strategy: :one_for_one)

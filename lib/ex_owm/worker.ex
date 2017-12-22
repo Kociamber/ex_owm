@@ -1,12 +1,12 @@
-defmodule ExOwm.Feature.Worker do
-  alias ExOwm.Feature.ApiCaller
+defmodule ExOwm.Worker do
+  alias ExOwm.Api
   alias ExOwm.Cache
 
-  def run(location, opts) do
+  def get_current_weather(location, opts) do
     case Cache.get(location) do
       # If location wasn't cached within last 10 minutes, call OWM API
       nil ->
-        result = ApiCaller.send_and_parse_request(location, opts)
+        result = Api.send_and_parse_request(:get_current_weather, location, opts)
         Cache.set(location, result, ttl: 10)
       # If location was cached within last 10 minutes, return it
       location ->

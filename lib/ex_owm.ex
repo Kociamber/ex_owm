@@ -1,5 +1,5 @@
 defmodule ExOwm do
-  alias ExOwm.Feature.Coordinator
+  alias ExOwm.Coordinator
   require Logger
   @moduledoc """
   Documentation for ExOwm, OpenWeatherMap API Elixir client.
@@ -42,7 +42,7 @@ defmodule ExOwm do
   """
   @spec get_current_weather_data(requests, options) :: map
   def get_current_weather_data(locations, opts \\ []) when is_list(locations) do
-    Coordinator.start_workers(locations, opts)
+    Coordinator.start_workers(:get_current_weather, locations, opts)
     Coordinator.get_state()
   end
 end
