@@ -56,5 +56,4 @@ defmodule ExOwm.RequestString.CurrentWeather do
   end
 
   defp add_api_key_substring(string), do: string <> "&APPID=#{Application.get_env(:ex_owm, :api_key)}"
-
 end

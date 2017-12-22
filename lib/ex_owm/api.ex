@@ -25,5 +25,4 @@ defmodule ExOwm.Api do
   defp parse_json({:error, reason}) do
     {:error, reason}
   end
-
 end
