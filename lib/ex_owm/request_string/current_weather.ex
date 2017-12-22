@@ -7,6 +7,7 @@ defmodule ExOwm.RequestString.CurrentWeather do
     {location, opts}
     |> add_prefix_substring()
     |> add_location_substring()
+    |> add_search_accuracy_substring()
     |> add_units_substring()
     |> add_language_substring()
     |> add_api_key_substring()
@@ -32,6 +33,14 @@ defmodule ExOwm.RequestString.CurrentWeather do
 
   defp add_location_substring({string, %{zip: zip, country_code: country_code}, opts}),
     do: {string <> "?zip=#{zip},#{country_code}", opts}
+
+  defp add_search_accuracy_substring({string, opts}) do
+    case Keyword.get(opts, :type) do
+      :like -> {string <> "&type=like", opts}
+      :accurate -> {string <> "&type=accurate", opts}
+      _     -> {string, opts}
+    end
+  end
 
   # Add temperature type to query string. Lack of this part make api to return default
   # temperature in Kelvins.
