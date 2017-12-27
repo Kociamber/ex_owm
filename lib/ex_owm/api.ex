@@ -1,8 +1,15 @@
 defmodule ExOwm.Api do
   alias ExOwm.RequestString.CurrentWeather
+  alias ExOwm.RequestString.FiveDayForecast
 
   def send_and_parse_request(:get_current_weather, location, opts) do
     CurrentWeather.build_request_string(location, opts)
+    |> call_api()
+    |> parse_json()
+  end
+
+  def send_and_parse_request(:get_five_day_forecast, location, opts) do
+    FiveDayForecast.build_request_string(location, opts)
     |> call_api()
     |> parse_json()
   end

@@ -34,15 +34,24 @@ defmodule ExOwm do
 
   ## Examples
 
-      iex> is_list ExOwm.get_current_weather_data([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl)
+      iex> is_list ExOwm.get_current_weather([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl)
       true
-      iex> is_list ExOwm.get_current_weather_data([%{id: 2759794}], units: :metric, lang: :nl)
+      iex> is_list ExOwm.get_current_weather([%{id: 2759794}], units: :metric, lang: :nl)
       true
 
   """
-  @spec get_current_weather_data(requests, options) :: map
-  def get_current_weather_data(locations, opts \\ []) when is_list(locations) do
+  @spec get_current_weather(requests, options) :: map
+  def get_current_weather(locations, opts \\ []) when is_list(locations) do
     Coordinator.start_workers(:get_current_weather, locations, opts)
+    Coordinator.get_state()
+  end
+
+  @doc """
+  Gets 5 day forecast data of the given location with specified options.
+  """
+  @spec get_five_day_forecast(requests, options) :: map
+  def get_five_day_forecast(locations, opts \\ []) when is_list(locations) do
+    Coordinator.start_workers(:get_five_day_forecast, locations, opts)
     Coordinator.get_state()
   end
 end
