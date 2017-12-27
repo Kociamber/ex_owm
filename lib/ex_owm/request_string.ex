@@ -1,10 +1,10 @@
-defmodule ExOwm.RequestString.CurrentWeather do
+defmodule ExOwm.RequestString do
 
-  # @todo:
-  # 1. Add validation for add_prefix_substring/2 params.
+  # 5 day forecast is available at any location or city.
+  # It includes weather data every 3 hours. Forecast is available in JSON or XML format.
 
-  def build_request_string(location, opts) do
-    {location, opts}
+  def build(api_call_type, location, opts) do
+    {api_call_type, location, opts}
     |> add_prefix_substring()
     |> add_location_substring()
     |> add_search_accuracy_substring()
@@ -14,9 +14,11 @@ defmodule ExOwm.RequestString.CurrentWeather do
   end
 
   # Start building querys string.
-  defp add_prefix_substring({location, opts}) do
-    {"api.openweathermap.org/data/2.5/weather", location, opts}
-  end
+  defp add_prefix_substring({:get_current_weather, location, opts}),
+    do: {"api.openweathermap.org/data/2.5/weather", location, opts}
+
+  defp add_prefix_substring({:get_five_day_forecast, location, opts}),
+    do: {"api.openweathermap.org/data/2.5/forecast", location, opts}
 
   # Add location type to query string.
   defp add_location_substring({string, %{city: city}, opts}),
@@ -42,7 +44,16 @@ defmodule ExOwm.RequestString.CurrentWeather do
     end
   end
 
-  # Add temperature type to query string. Lack of this part make api to return default
+  # Add format type to a query string. Lack of this part make api to return default
+  # JSON format answer.
+  defp add_format_substring({string, opts}) do
+    case Keyword.get(opts, :mode) do
+      :xml -> {string <> "&mode=xml", opts}
+      _    -> {string, opts}
+    end
+  end
+
+  # Add temperature type to a query string. Lack of this part make api to return default
   # temperature in Kelvins.
   defp add_units_substring({string, opts}) do
     case Keyword.get(opts, :units) do
