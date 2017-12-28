@@ -1,17 +1,17 @@
 defmodule ExOwm.Api do
   alias ExOwm.RequestString
 
-  def send_and_parse_request(:get_current_weather, location, opts) do
-    RequestString.build(:get_current_weather, location, opts)
+  def send_and_parse_request(api_call_type, location, opts) do
+    RequestString.build(api_call_type, location, opts)
     |> call_api()
     |> parse_json()
   end
 
-  def send_and_parse_request(:get_five_day_forecast, location, opts) do
-    FiveDayForecast.build(location, opts)
-    |> call_api()
-    |> parse_json()
-  end
+  # def send_and_parse_request(:get_five_day_forecast, location, opts) do
+  #   RequestString.build(:get_five_day_forecast, location, opts)
+  #   |> call_api()
+  #   |> parse_json()
+  # end
 
   defp call_api(string) do
     case HTTPoison.get(string) do
