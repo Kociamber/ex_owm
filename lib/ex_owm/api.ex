@@ -7,12 +7,6 @@ defmodule ExOwm.Api do
     |> parse_json()
   end
 
-  # def send_and_parse_request(:get_five_day_forecast, location, opts) do
-  #   RequestString.build(:get_five_day_forecast, location, opts)
-  #   |> call_api()
-  #   |> parse_json()
-  # end
-
   defp call_api(string) do
     case HTTPoison.get(string) do
       {:ok, %HTTPoison.Response{status_code: 200, body: json_body}} ->
@@ -28,6 +22,7 @@ defmodule ExOwm.Api do
     {:ok, map} = Poison.decode(json)
     map
   end
+
   defp parse_json({:error, reason}) do
     {:error, reason}
   end

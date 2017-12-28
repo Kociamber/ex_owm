@@ -48,6 +48,15 @@ defmodule ExOwm do
 
   @doc """
   Gets 5 day forecast data of the given location with specified options.
+
+  ## Examples
+
+      iex> is_list ExOwm.get_five_day_forecast([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl)
+      true
+      iex> is_list ExOwm.get_five_day_forecast([%{id: 2759794}], units: :metric, lang: :nl)
+      true
+
+
   """
   @spec get_five_day_forecast(requests, options) :: map
   def get_five_day_forecast(locations, opts \\ []) when is_list(locations) do
