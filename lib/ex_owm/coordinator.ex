@@ -19,6 +19,10 @@ defmodule ExOwm.Coordinator do
     GenServer.call(:exowm_coordinator, {:get_five_day_forecast, locations, opts})
   end
 
+  def start_workers(:get_sixteen_day_forecast, locations, opts) do
+    GenServer.call(:exowm_coordinator, {:get_sixteen_day_forecast, locations, opts})
+  end
+
   ## Server implementation
   def init(_) do
     {:ok, %{}}
@@ -36,6 +40,10 @@ defmodule ExOwm.Coordinator do
     spawn_worker_tasks(:get_five_day_forecast, locations, opts)
   end
 
+  def handle_call({:get_sixteen_day_forecast, locations, opts}, _from, _state) do
+    spawn_worker_tasks(:get_sixteen_day_forecast, locations, opts)
+  end
+
   defp spawn_worker_tasks(api_call_type, locations, opts) do
     worker_tasks =
       case api_call_type do
@@ -43,6 +51,8 @@ defmodule ExOwm.Coordinator do
           Enum.map(locations, fn(location) -> Task.async(Worker, :get_current_weather, [location, opts]) end)
         :get_five_day_forecast ->
           Enum.map(locations, fn(location) -> Task.async(Worker, :get_five_day_forecast, [location, opts]) end)
+        :get_sixteen_day_forecast ->
+          Enum.map(locations, fn(location) -> Task.async(Worker, :get_sixteen_day_forecast, [location, opts]) end)
       end
     results = Enum.map(worker_tasks, fn(task) -> Task.await(task) end)
     {:reply, results, results}

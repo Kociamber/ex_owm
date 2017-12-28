@@ -10,6 +10,7 @@ defmodule ExOwm.RequestString do
     |> add_search_accuracy_substring()
     |> add_format_substring()
     |> add_units_substring()
+    |> add_day_count()
     |> add_language_substring()
     |> add_api_key_substring()
   end
@@ -20,8 +21,9 @@ defmodule ExOwm.RequestString do
   # Five day forecast call.
   defp add_prefix_substring({:get_five_day_forecast, location, opts}),
     do: {"api.openweathermap.org/data/2.5/forecast", location, opts}
-
-  #api.openweathermap.org/data/2.5/forecast/daily
+  # Sixteen day forecast call.
+  defp add_prefix_substring({:get_sixteen_day_forecast, location, opts}),
+    do: {"api.openweathermap.org/data/2.5/forecast/daily", location, opts}
 
   # Call by city name.
   defp add_location_substring({string, %{city: city}, opts}),
@@ -63,6 +65,14 @@ defmodule ExOwm.RequestString do
       :metric   -> {string <> "&units=metric", opts}
       :imperial -> {string <> "&units=imperial", opts}
       _         -> {string, opts}
+    end
+  end
+
+  # Add day count for 1 to 16 day forecast.
+  defp add_day_count({string, opts}) do
+    case Keyword.get(opts, :cnt) do
+      nil -> {string, opts}
+      cnt -> {string <> "&cnt=#{cnt}", opts}
     end
   end
 
