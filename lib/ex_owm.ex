@@ -64,21 +64,21 @@ defmodule ExOwm do
     Coordinator.get_state()
   end
 
-  @doc """
-  Gets 5 day forecast data of the given location with specified options.
-
-  ## Examples
-
-      iex> is_list ExOwm.get_sixteen_day_forecast([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl, cnt: 16)
-      true
-      iex> is_list ExOwm.get_sixteen_day_forecast([%{id: 2759794}], units: :metric, lang: :nl, cnt: 10)
-      true
-
-
-  """
-  @spec get_sixteen_day_forecast(requests, options) :: map
-  def get_sixteen_day_forecast(locations, opts \\ []) when is_list(locations) do
-    Coordinator.start_workers(:get_sixteen_day_forecast, locations, opts)
-    Coordinator.get_state()
-  end
+  # @doc """
+  # Gets 5 day forecast data of the given location with specified options.
+  #
+  # ## Examples
+  #
+  #     iex> is_list ExOwm.get_sixteen_day_forecast([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl, cnt: 16)
+  #     true
+  #     iex> is_list ExOwm.get_sixteen_day_forecast([%{id: 2759794}], units: :metric, lang: :nl, cnt: 10)
+  #     true
+  #
+  #
+  # """
+  # @spec get_sixteen_day_forecast(requests, options) :: map
+  # def get_sixteen_day_forecast(locations, opts \\ []) when is_list(locations) do
+  #   Coordinator.start_workers(:get_sixteen_day_forecast, locations, opts)
+  #   Coordinator.get_state()
+  # end
 end
