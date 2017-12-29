@@ -13,8 +13,12 @@ defmodule GetFiveDayForecastTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Warsaw"
+    # check wether map has specific value to confirm that request was successful
+    city_name =
+      map
+      |> Map.get("city")
+      |> Map.get("name")
+    assert city_name == "Warsaw"
   end
 
   test ": can get weather data with get_five_day_forecast/1 by city name and country code" do
@@ -28,8 +32,12 @@ defmodule GetFiveDayForecastTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Warsaw"
+    # check wether map has specific value to confirm that request was successful
+    city_name =
+      map
+      |> Map.get("city")
+      |> Map.get("name")
+    assert city_name == "Warsaw"
   end
 
   test ": can get weather data with get_five_day_forecast/1 by city id" do
@@ -43,8 +51,12 @@ defmodule GetFiveDayForecastTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Amsterdam"
+    # check wether map has specific value to confirm that request was successful
+    city_name =
+      map
+      |> Map.get("city")
+      |> Map.get("name")
+    assert city_name == "Amsterdam"
   end
 
   test ": can get weather data with get_five_day_forecast/1 by latitude and longitude" do
@@ -58,8 +70,12 @@ defmodule GetFiveDayForecastTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Amsterdam"
+    # check wether map has specific value to confirm that request was successful
+    city_name =
+      map
+      |> Map.get("city")
+      |> Map.get("name")
+    assert city_name == "Amsterdam"
   end
 
   test ": can get weather data with get_five_day_forecast/1 by zip and country code" do
@@ -73,8 +89,12 @@ defmodule GetFiveDayForecastTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Mountain View"
+    # check wether map has specific value to confirm that request was successful
+    city_name =
+      map
+      |> Map.get("city")
+      |> Map.get("name")
+    assert city_name == "Mountain View"
   end
 
   test ": can get weather data with get_five_day_forecast/1 by city name with options" do
@@ -89,8 +109,12 @@ defmodule GetFiveDayForecastTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Warsaw"
+    # check wether map has specific value to confirm that request was successful
+    city_name =
+      map
+      |> Map.get("city")
+      |> Map.get("name")
+    assert city_name == "Warsaw"
   end
 
   test ": can get weather data with get_five_day_forecast/1 by city name and country code with options" do
@@ -105,8 +129,12 @@ defmodule GetFiveDayForecastTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Warsaw"
+    # check wether map has specific value to confirm that request was successful
+    city_name =
+      map
+      |> Map.get("city")
+      |> Map.get("name")
+    assert city_name == "Warsaw"
   end
 
   test ": can get weather data with get_five_day_forecast/1 by city id with options" do
@@ -121,8 +149,12 @@ defmodule GetFiveDayForecastTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Amsterdam"
+    # check wether map has specific value to confirm that request was successful
+    city_name =
+      map
+      |> Map.get("city")
+      |> Map.get("name")
+    assert city_name == "Amsterdam"
   end
 
   test ": can get weather data with get_five_day_forecast/1 by latitude and longitude with options" do
@@ -137,8 +169,12 @@ defmodule GetFiveDayForecastTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Amsterdam"
+    # check wether map has specific value to confirm that request was successful
+    city_name =
+      map
+      |> Map.get("city")
+      |> Map.get("name")
+    assert city_name == "Amsterdam"
   end
 
   test ": can get weather data with get_five_day_forecast/1 by zip and country code with options" do
@@ -153,7 +189,11 @@ defmodule GetFiveDayForecastTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Mountain View"
+    # check wether map has specific value to confirm that request was successful
+    city_name =
+      map
+      |> Map.get("city")
+      |> Map.get("name")
+    assert city_name == "Mountain View"
   end
 end
