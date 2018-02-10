@@ -5,7 +5,7 @@ defmodule ExOwm.Mixfile do
     [
       app: :ex_owm,
       version: "0.1.0",
-      elixir: "~> 1.5",
+      elixir: "~> 1.6",
       start_permanent: Mix.env == :prod,
       deps: deps()
     ]
@@ -22,9 +22,9 @@ defmodule ExOwm.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:httpoison, "~> 0.13"},
+      {:httpoison, "~> 1.0"},
       {:poison, "~> 3.1"},
-      {:nebulex, "~> 1.0.0-rc.2"}
+      {:nebulex, "~> 1.0.0-rc.3"}
     ]
   end
 end
