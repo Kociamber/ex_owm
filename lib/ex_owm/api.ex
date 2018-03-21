@@ -1,6 +1,14 @@
 defmodule ExOwm.Api do
+  @moduledoc """
+  This is OpenWeatherMap public API module.
+  """
   alias ExOwm.RequestString
 
+  @doc """
+  Prepares request string basing on given params, calls OWM API, parses and
+  decodes the answers.
+  """
+  @spec send_and_parse_request(atom, map, [key: atom]) :: map
   def send_and_parse_request(api_call_type, location, opts) do
     RequestString.build(api_call_type, location, opts)
     |> call_api()

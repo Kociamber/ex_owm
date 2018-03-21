@@ -1,4 +1,8 @@
 defmodule ExOwm.Supervisor do
+  @moduledoc """
+  Standard Supervisor implementation. The only child is Coordinator GenSever
+  used for concurrent OWM API calls handling. 
+  """
   use Supervisor
   alias ExOwm.Coordinator
 

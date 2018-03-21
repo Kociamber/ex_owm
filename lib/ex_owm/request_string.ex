@@ -1,8 +1,15 @@
 defmodule ExOwm.RequestString do
+  @moduledoc """
+  Request string cretion.
+  """
 
   # 5 day forecast is available at any location or city.
   # It includes weather data every 3 hours. Forecast is available in JSON or XML format.
 
+  @doc """
+  Builds request string basing on provided params.
+  """
+  @spec build(atom, map, [key: :atom]) :: String.t
   def build(api_call_type, location, opts) do
     {api_call_type, location, opts}
     |> add_prefix_substring()

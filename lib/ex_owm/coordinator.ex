@@ -1,4 +1,8 @@
 defmodule ExOwm.Coordinator do
+  @moduledoc """
+  This module is GenServer implementation created for handling concurrent
+  worker task coordination.
+  """
   use GenServer
   alias ExOwm.Worker
 

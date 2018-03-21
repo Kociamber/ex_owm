@@ -2,7 +2,7 @@ defmodule ExOwm do
   alias ExOwm.Coordinator
   require Logger
   @moduledoc """
-  Documentation for ExOwm, OpenWeatherMap API Elixir client.
+  ExOwm, OpenWeatherMap API Elixir client.
   """
 
   @typedoc """

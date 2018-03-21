@@ -24,7 +24,8 @@ defmodule ExOwm.Mixfile do
     [
       {:httpoison, "~> 1.0"},
       {:poison, "~> 3.1"},
-      {:nebulex, "~> 1.0.0-rc.3"}
+      {:nebulex, "~> 1.0.0-rc.3"},
+      {:ex_doc, "~> 0.18", only: :dev, runtime: false}
     ]
   end
 end
