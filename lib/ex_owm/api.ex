@@ -15,6 +15,8 @@ defmodule ExOwm.Api do
         {:error, :not_found}
       {:ok, %HTTPoison.Response{status_code: 400}} ->
         {:error, :not_found}
+      {:ok, %HTTPoison.Response{status_code: 401}} ->
+        {:error, :api_key_invalid}
     end
   end
 
