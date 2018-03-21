@@ -2,6 +2,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
   use ExUnit.Case
   doctest ExOwm
 
+  @tag :skip
   test ": can get weather data with get_sixteen_day_forecast/1 by city name" do
     # given
     city = %{city: "Warsaw"}
@@ -21,6 +22,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
     assert city_name == "Warsaw"
   end
 
+  @tag :skip
   test ": can get weather data with get_sixteen_day_forecast/1 by city name and country code" do
     # given
     city = %{city: "Warsaw", countr_code: "pl"}
@@ -40,6 +42,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
     assert city_name == "Warsaw"
   end
 
+  @tag :skip
   test ": can get weather data with get_sixteen_day_forecast/1 by city id" do
     # given
     city = %{id: 2759794}
@@ -59,6 +62,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
     assert city_name == "Amsterdam"
   end
 
+  @tag :skip
   test ": can get weather data with get_sixteen_day_forecast/1 by latitude and longitude" do
     # given
     city = %{lat: 52.374031, lon: 4.88969}
@@ -78,6 +82,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
     assert city_name == "Amsterdam"
   end
 
+  @tag :skip
   test ": can get weather data with get_sixteen_day_forecast/1 by zip and country code" do
     # given
     city = %{zip: "94040", country_code: "us"}
@@ -97,6 +102,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
     assert city_name == "Mountain View"
   end
 
+  @tag :skip
   test ": can get weather data with get_sixteen_day_forecast/1 by city name with options" do
     # given
     city = %{city: "Warsaw"}
@@ -117,6 +123,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
     assert city_name == "Warsaw"
   end
 
+  @tag :skip
   test ": can get weather data with get_sixteen_day_forecast/1 by city name and country code with options" do
     # given
     city = %{city: "Warsaw", countr_code: "pl"}
@@ -137,6 +144,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
     assert city_name == "Warsaw"
   end
 
+  @tag :skip
   test ": can get weather data with get_sixteen_day_forecast/1 by city id with options" do
     # given
     city = %{id: 2759794}
@@ -157,6 +165,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
     assert city_name == "Amsterdam"
   end
 
+  @tag :skip
   test ": can get weather data with get_sixteen_day_forecast/1 by latitude and longitude with options" do
     # given
     city = %{lat: 52.374031, lon: 4.88969}
@@ -177,6 +186,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
     assert city_name == "Amsterdam"
   end
 
+  @tag :skip
   test ": can get weather data with get_sixteen_day_forecast/1 by zip and country code with options" do
     # given
     city = %{zip: "94040", country_code: "us"}
