@@ -9,7 +9,8 @@ defmodule ExOwm do
   Current weather data API request.
   """
   @type request ::
-    %{city: String.t} | %{city: String.t, country_code: String.t} |
+    %{city: String.t} |
+    %{city: String.t, country_code: String.t} |
     %{id: integer()} |
     %{lat: float(), lon: float()} |
     %{zip: String.t, country_code: String.t}
@@ -20,12 +21,14 @@ defmodule ExOwm do
   @type requests :: [request]
 
   @typedoc """
-  Current weather data API call available options.
+  Current weather data API call options.
   """
-  @type option :: :format | :units | :lang | :cnt
+  @type option ::
+    :format | :units | :lang | :cnt | :like |
+    :accurate | :mode | :cnt
 
   @typedoc """
-  Keyword list of options
+  Keyword list of options.
   """
   @type options :: [option: term]
 
@@ -64,21 +67,21 @@ defmodule ExOwm do
     Coordinator.get_state()
   end
 
-  # @doc """
-  # Gets 5 day forecast data of the given location with specified options.
-  #
-  # ## Examples
-  #
-  #     iex> is_list ExOwm.get_sixteen_day_forecast([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl, cnt: 16)
-  #     true
-  #     iex> is_list ExOwm.get_sixteen_day_forecast([%{id: 2759794}], units: :metric, lang: :nl, cnt: 10)
-  #     true
-  #
-  #
-  # """
-  # @spec get_sixteen_day_forecast(requests, options) :: map
-  # def get_sixteen_day_forecast(locations, opts \\ []) when is_list(locations) do
-  #   Coordinator.start_workers(:get_sixteen_day_forecast, locations, opts)
-  #   Coordinator.get_state()
-  # end
+  @doc """
+  Gets 1 to 16 days forecast data of the given location with specified options.
+
+  ## Examples
+
+      iex> is_list ExOwm.get_sixteen_day_forecast([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl, cnt: 16)
+      true
+      iex> is_list ExOwm.get_sixteen_day_forecast([%{id: 2759794}], units: :metric, lang: :nl, cnt: 10)
+      true
+
+
+  """
+  @spec get_sixteen_day_forecast(requests, options) :: map
+  def get_sixteen_day_forecast(locations, opts \\ []) when is_list(locations) do
+    Coordinator.start_workers(:get_sixteen_day_forecast, locations, opts)
+    Coordinator.get_state()
+  end
 end
