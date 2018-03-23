@@ -22,7 +22,10 @@ defmodule ExOwm do
   @type requests :: [request]
 
   @typedoc """
-  Current weather data API call options.
+  Current weather data API call options corresponding to OWM APIs described in
+  official docs: http://openweathermap.org/api
+
+  The output of the request can be specified according to below options.
   """
   @type option ::
     :format | :units | :lang | :cnt | :like |
