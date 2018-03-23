@@ -1,6 +1,6 @@
 defmodule ExOwm.Api do
   @moduledoc """
-  This is OpenWeatherMap public API module.
+  This module contains OpenWeatherMap API related functions.
   """
   alias ExOwm.RequestString
 

@@ -3,6 +3,7 @@ defmodule ExOwm do
   require Logger
   @moduledoc """
   ExOwm, OpenWeatherMap API Elixir client.
+  This module contains main public interface of the application.
   """
 
   @typedoc """

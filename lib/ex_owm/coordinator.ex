@@ -1,6 +1,6 @@
 defmodule ExOwm.Coordinator do
   @moduledoc """
-  This module is GenServer implementation created for handling concurrent
+  This module is a GenServer implementation created for handling concurrent
   worker task coordination.
   """
   use GenServer
