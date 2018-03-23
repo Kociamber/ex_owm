@@ -67,7 +67,7 @@ ExOwm.get_sixteen_day_forecast([%{city: "Warsaw"}, %{city: "London", country_cod
 {:ok, %{WEATHER_DATA}}
 ```
 
-Please refer to official docs for more details.
+Please refer to official [docs](https://hexdocs.pm/ex_owm/readme.html) for more details.
 
 ## Overivew
 
