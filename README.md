@@ -2,8 +2,6 @@
 
 [![Build Status](https://travis-ci.org/Kociamber/ex_owm.svg?branch=master)](https://travis-ci.org/Kociamber/ex_owm)
 [![Hex version badge](https://img.shields.io/hexpm/v/Kociamber/ex_owm.svg)](https://hex.pm/packages/Kociamber/ex_owm)
-[![License badge](https://img.shields.io/hexpm/l/Kociamber/ex_owm.svg)](https://github.com/surgeventures/repo-example-elixir/blob/master/LICENSE.md)
-
 
 **Fast, industrial strength [OpenWeatherMap](http://openweathermap.org/technology) interface for based Elixir platforms.**
 
