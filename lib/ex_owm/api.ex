@@ -19,12 +19,12 @@ defmodule ExOwm.Api do
     case HTTPoison.get(string) do
       {:ok, %HTTPoison.Response{status_code: 200, body: json_body}} ->
         {:ok, json_body}
-      {:ok, %HTTPoison.Response{status_code: 404}} ->
-        {:error, :not_found}
-      {:ok, %HTTPoison.Response{status_code: 400}} ->
-        {:error, :not_found}
-      {:ok, %HTTPoison.Response{status_code: 401}} ->
-        {:error, :api_key_invalid}
+      {:ok, %HTTPoison.Response{status_code: 404, body: json_body}} ->
+        {:error, :not_found, json_body}
+      {:ok, %HTTPoison.Response{status_code: 400, body: json_body}} ->
+        {:error, :not_found, json_body}
+      {:ok, %HTTPoison.Response{status_code: 401, body: json_body}} ->
+        {:error, :api_key_invalid, json_body}
     end
   end
 
@@ -33,7 +33,7 @@ defmodule ExOwm.Api do
     map
   end
 
-  defp parse_json({:error, reason}) do
-    {:error, reason}
+  defp parse_json({:error, reason, json_body}) do
+    {:error, reason, json_body}
   end
 end
