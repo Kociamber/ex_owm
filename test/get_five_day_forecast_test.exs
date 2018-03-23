@@ -1,6 +1,5 @@
 defmodule GetFiveDayForecastTest do
   use ExUnit.Case
-  doctest ExOwm
 
   test ": can get weather data with get_five_day_forecast/1 by city name" do
     # given

@@ -1,6 +1,5 @@
 defmodule Getget_sixteen_day_forecastDaySixteenTest do
   use ExUnit.Case
-  doctest ExOwm
 
   @tag :skip
   test ": can get weather data with get_sixteen_day_forecast/1 by city name" do

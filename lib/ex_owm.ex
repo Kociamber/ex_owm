@@ -38,10 +38,7 @@ defmodule ExOwm do
 
   ## Examples
 
-      iex> is_list ExOwm.get_current_weather([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl)
-      true
-      iex> is_list ExOwm.get_current_weather([%{id: 2759794}], units: :metric, lang: :nl)
-      true
+      iex> ExOwm.get_current_weather([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl)
 
   """
   @spec get_current_weather(requests, options) :: map
@@ -55,11 +52,7 @@ defmodule ExOwm do
 
   ## Examples
 
-      iex> is_list ExOwm.get_five_day_forecast([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl)
-      true
-      iex> is_list ExOwm.get_five_day_forecast([%{id: 2759794}], units: :metric, lang: :nl)
-      true
-
+      iex> ExOwm.get_five_day_forecast([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl)
 
   """
   @spec get_five_day_forecast(requests, options) :: map
@@ -73,11 +66,7 @@ defmodule ExOwm do
 
   ## Examples
 
-      iex> is_list ExOwm.get_sixteen_day_forecast([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl, cnt: 16)
-      true
-      iex> is_list ExOwm.get_sixteen_day_forecast([%{id: 2759794}], units: :metric, lang: :nl, cnt: 10)
-      true
-
+      iex> ExOwm.get_sixteen_day_forecast([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl, cnt: 16)
 
   """
   @spec get_sixteen_day_forecast(requests, options) :: map
