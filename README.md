@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/Kociamber/ex_owm.svg?branch=master)](https://travis-ci.org/Kociamber/ex_owm)
 [![Hex version badge](https://img.shields.io/hexpm/v/ex_owm.svg)](https://hex.pm/packages/ex_owm)
 
-**Fast, industrial strength [OpenWeatherMap](http://openweathermap.org/technology) interface for based Elixir platforms.**
+**Fast, industrial strength [Open Weather Map](http://openweathermap.org/technology) interface for based Elixir platforms.**
 
 ## Installation
 
@@ -17,10 +17,10 @@ end
 
 ## Configuration
 
-In order to be able to use OWM APIs, you need to register free account and get free API KEY.
+In order to be able to use OWM APIs, you need to [register](https://home.openweathermap.org/users/sign_up) free account and get free API KEY.
 After obtaining the key, please set environmental variable called OWM_API_KEY and set the value to your API KEY.
 
-If you are going to use this application as a dependency in your own project, you will have to copy and paste below configuration to your `config/config.exs` file:
+If you are going to use this application as a dependency in your own project, you will need to copy and paste below configuration to your `config/config.exs` file:
 
 ```elixir
 config :ex_owm, api_key: System.get_env("OWM_API_KEY")
@@ -45,13 +45,13 @@ config :ex_owm, ExOwm.Cache.SixteenDayForecast,
 
 ## Basic Usage
 
-ExOwm is currently handling three main OpenWeatherMap APIs:
+ExOwm is currently handling three main OpenWeatherMap [APIs](http://openweathermap.org/api):
 
 *   [Current weather data](http://openweathermap.org/current)
 *   [5 day / 3 hour forecast](http://openweathermap.org/forecast5)
 *   [1 - 16 day / daily forecast](http://openweathermap.org/forecast16)
 
-Please note that with standard free license and OpenWeatherMap API key you may be limited with amout of requests per minute and may not be able to access 1 - 16 day / daily forecast. Please refer to OpenWeatherMap license [plans](http://openweathermap.org/price).
+Please note that with standard (free) license / API key you may be limited with amount of requests per minute and may not be able to access 1 - 16 day / daily forecast. Please refer to OpenWeatherMap license [plans](http://openweathermap.org/price).
 
 There are three main public interface functions for each API and they accepts the same set of two params - a list of location maps and a keyword list of options.
 
@@ -79,8 +79,8 @@ ExOwm is using many cool features like:
 
 ## To be done in next release
 
-*   Cache TTL as a param for each interface
-*   Historical Data API
+*   Add cache TTL as a param for each interface
+*   Add Historical Data API
 
 ## License
 
