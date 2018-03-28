@@ -71,11 +71,13 @@ Please refer to official [docs](https://hexdocs.pm/ex_owm/readme.html) for more 
 
 ## Overivew
 
-ExOwm is using many cool features like:
+ExOwm is using cool features like:
 
 *   concurrent API calls
 *   super fast generational caching
 *   access to **main** [OWM APIs](http://openweathermap.org/api)!
+
+It means that each location entry passed within the list spawns separate task (Elixir worker process) which is checking wether the request has been already sent within a time interval, if yes, it's fetching the result from cache. Otherwise it sends API query, saves the result in cache and returns the data. 
 
 ## To be done in next release
 
