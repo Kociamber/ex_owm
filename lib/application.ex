@@ -4,7 +4,7 @@ defmodule ExOwm.Application do
 
   def start(_type, _args) do
     import Supervisor.Spec
-    Logger.info "Starting supervision tree for #{inspect(__MODULE__)}"
+    Logger.info("Starting supervision tree for #{inspect(__MODULE__)}")
 
     children = [
       supervisor(ExOwm.Supervisor, []),

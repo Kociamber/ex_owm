@@ -1,6 +1,7 @@
 defmodule ExOwm do
   alias ExOwm.Coordinator
   require Logger
+
   @moduledoc """
   ExOwm, OpenWeatherMap API Elixir client.
   This module contains main public interface of the application.
@@ -10,11 +11,11 @@ defmodule ExOwm do
   Current weather data API request.
   """
   @type request ::
-    %{city: String.t} |
-    %{city: String.t, country_code: String.t} |
-    %{id: integer()} |
-    %{lat: float(), lon: float()} |
-    %{zip: String.t, country_code: String.t}
+          %{city: String.t()}
+          | %{city: String.t(), country_code: String.t()}
+          | %{id: integer()}
+          | %{lat: float(), lon: float()}
+          | %{zip: String.t(), country_code: String.t()}
 
   @typedoc """
   Current weather data API requests.
@@ -27,9 +28,7 @@ defmodule ExOwm do
 
   The output of the request can be specified according to below options.
   """
-  @type option ::
-    :format | :units | :lang | :cnt | :like |
-    :accurate | :mode | :cnt
+  @type option :: :format | :units | :lang | :cnt | :like | :accurate | :mode | :cnt
 
   @typedoc """
   Keyword list of options.

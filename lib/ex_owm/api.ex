@@ -8,7 +8,7 @@ defmodule ExOwm.Api do
   Prepares request string basing on given params, calls OWM API, parses and
   decodes the answers.
   """
-  @spec send_and_parse_request(atom, map, [key: atom]) :: map
+  @spec send_and_parse_request(atom, map, key: atom) :: map
   def send_and_parse_request(api_call_type, location, opts) do
     RequestString.build(api_call_type, location, opts)
     |> call_api()
@@ -19,10 +19,13 @@ defmodule ExOwm.Api do
     case HTTPoison.get(string) do
       {:ok, %HTTPoison.Response{status_code: 200, body: json_body}} ->
         {:ok, json_body}
+
       {:ok, %HTTPoison.Response{status_code: 404, body: json_body}} ->
         {:error, :not_found, json_body}
+
       {:ok, %HTTPoison.Response{status_code: 400, body: json_body}} ->
         {:error, :not_found, json_body}
+
       {:ok, %HTTPoison.Response{status_code: 401, body: json_body}} ->
         {:error, :api_key_invalid, json_body}
     end

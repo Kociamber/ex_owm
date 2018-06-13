@@ -52,13 +52,22 @@ defmodule ExOwm.Coordinator do
     worker_tasks =
       case api_call_type do
         :get_current_weather ->
-          Enum.map(locations, fn(location) -> Task.async(Worker, :get_current_weather, [location, opts]) end)
+          Enum.map(locations, fn location ->
+            Task.async(Worker, :get_current_weather, [location, opts])
+          end)
+
         :get_five_day_forecast ->
-          Enum.map(locations, fn(location) -> Task.async(Worker, :get_five_day_forecast, [location, opts]) end)
+          Enum.map(locations, fn location ->
+            Task.async(Worker, :get_five_day_forecast, [location, opts])
+          end)
+
         :get_sixteen_day_forecast ->
-          Enum.map(locations, fn(location) -> Task.async(Worker, :get_sixteen_day_forecast, [location, opts]) end)
+          Enum.map(locations, fn location ->
+            Task.async(Worker, :get_sixteen_day_forecast, [location, opts])
+          end)
       end
-    results = Enum.map(worker_tasks, fn(task) -> Task.await(task) end)
+
+    results = Enum.map(worker_tasks, fn task -> Task.await(task) end)
     {:reply, results, results}
   end
 end

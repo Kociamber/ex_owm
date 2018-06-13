@@ -9,7 +9,7 @@ defmodule ExOwm.RequestString do
   @doc """
   Builds request string basing on provided params.
   """
-  @spec build(atom, map, [key: :atom]) :: String.t
+  @spec build(atom, map, key: :atom) :: String.t()
   def build(api_call_type, location, opts) do
     {api_call_type, location, opts}
     |> add_prefix_substring()
@@ -25,9 +25,11 @@ defmodule ExOwm.RequestString do
   # Current weather call.
   defp add_prefix_substring({:get_current_weather, location, opts}),
     do: {"api.openweathermap.org/data/2.5/weather", location, opts}
+
   # Five day forecast call.
   defp add_prefix_substring({:get_five_day_forecast, location, opts}),
     do: {"api.openweathermap.org/data/2.5/forecast", location, opts}
+
   # Sixteen day forecast call.
   defp add_prefix_substring({:get_sixteen_day_forecast, location, opts}),
     do: {"api.openweathermap.org/data/2.5/forecast/daily", location, opts}
@@ -35,15 +37,19 @@ defmodule ExOwm.RequestString do
   # Call by city name.
   defp add_location_substring({string, %{city: city}, opts}),
     do: {string <> "?q=#{city}", opts}
+
   # Call by city name and ISO 3166 country code.
   defp add_location_substring({string, %{city: city, country_code: country_code}, opts}),
     do: {string <> "?q=#{city},#{country_code}", opts}
+
   # Call by city id.
   defp add_location_substring({string, %{id: id}, opts}),
     do: {string <> "?id=#{id}", opts}
+
   # Call by geo coordinates.
   defp add_location_substring({string, %{lat: lat, lon: lon}, opts}),
     do: {string <> "?lat=#{lat}&lon=#{lon}", opts}
+
   # Call by zip and ISO 3166 country code.
   defp add_location_substring({string, %{zip: zip, country_code: country_code}, opts}),
     do: {string <> "?zip=#{zip},#{country_code}", opts}
@@ -52,7 +58,7 @@ defmodule ExOwm.RequestString do
     case Keyword.get(opts, :type) do
       :like -> {string <> "&type=like", opts}
       :accurate -> {string <> "&type=accurate", opts}
-      _     -> {string, opts}
+      _ -> {string, opts}
     end
   end
 
@@ -61,7 +67,7 @@ defmodule ExOwm.RequestString do
   defp add_format_substring({string, opts}) do
     case Keyword.get(opts, :mode) do
       :xml -> {string <> "&mode=xml", opts}
-      _    -> {string, opts}
+      _ -> {string, opts}
     end
   end
 
@@ -69,9 +75,9 @@ defmodule ExOwm.RequestString do
   # temperature in Kelvins.
   defp add_units_substring({string, opts}) do
     case Keyword.get(opts, :units) do
-      :metric   -> {string <> "&units=metric", opts}
+      :metric -> {string <> "&units=metric", opts}
       :imperial -> {string <> "&units=imperial", opts}
-      _         -> {string, opts}
+      _ -> {string, opts}
     end
   end
 
@@ -92,12 +98,15 @@ defmodule ExOwm.RequestString do
         lang =
           Keyword.get(opts, :lang)
           |> Atom.to_string()
+
         string <> "&lang=#{lang}"
+
       false ->
         string
     end
   end
 
   # Add API key.
-  defp add_api_key_substring(string), do: string <> "&APPID=#{Application.get_env(:ex_owm, :api_key)}"
+  defp add_api_key_substring(string),
+    do: string <> "&APPID=#{Application.get_env(:ex_owm, :api_key)}"
 end
