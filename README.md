@@ -11,7 +11,7 @@ Add ExOwm as a dependency to your `mix.exs` file:
 
 ```elixir
 defp deps() do
-  [{:ex_owm, "~> 1.0.0-rc.1"}]
+  [{:ex_owm, "~> 1.0.0"}]
 end
 ```
 
@@ -79,9 +79,8 @@ ExOwm is using cool features like:
 
 It means that each location entry passed within the list spawns separate task (Elixir worker process) which is checking wether the request has been already sent within a time interval, if yes, it's fetching the result from cache. Otherwise it sends API query, saves the result in cache and returns the data.
 
-## To do before the release
+## To do
 
-*   Add cache TTL as a param for each interface
 *   Add Historical Data API
 
 ## License

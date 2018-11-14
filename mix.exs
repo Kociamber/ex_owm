@@ -6,7 +6,7 @@ defmodule ExOwm.Mixfile do
     [
       app: :ex_owm,
       name: "ExOwm",
-      version: "1.0.0-rc.1",
+      version: "1.0.0",
       description: "OpenWeatherMap API Elixir client.",
       source_url: @github_url,
       homepage_url: @github_url,
@@ -15,7 +15,7 @@ defmodule ExOwm.Mixfile do
         licenses: ["MIT"],
         links: %{"GitHub" => @github_url}
       ],
-      elixir: "~> 1.6",
+      elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       docs: [
@@ -36,11 +36,11 @@ defmodule ExOwm.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:httpoison, "~> 1.0"},
+      {:httpoison, "~> 1.4"},
       {:poison, "~> 3.1"},
-      {:nebulex, "~> 1.0.0-rc.3"},
-      {:ex_doc, "~> 0.18", only: :dev, runtime: false},
-      {:credo, "~> 0.9.1", only: [:dev, :test], runtime: false}
+      {:nebulex, "~> 1.0.0"},
+      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
+      {:credo, "~> 0.10.0", only: [:dev, :test], runtime: false}
     ]
   end
 end
