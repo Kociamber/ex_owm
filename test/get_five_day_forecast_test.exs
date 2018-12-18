@@ -17,6 +17,7 @@ defmodule GetFiveDayForecastTest do
       map
       |> Map.get("city")
       |> Map.get("name")
+
     assert city_name == "Warsaw"
   end
 
@@ -36,12 +37,13 @@ defmodule GetFiveDayForecastTest do
       map
       |> Map.get("city")
       |> Map.get("name")
+
     assert city_name == "Warsaw"
   end
 
   test ": can get weather data with get_five_day_forecast/1 by city id" do
     # given
-    city = %{id: 2759794}
+    city = %{id: 2_759_794}
     # when
     result = ExOwm.get_five_day_forecast([city])
     # then
@@ -55,6 +57,7 @@ defmodule GetFiveDayForecastTest do
       map
       |> Map.get("city")
       |> Map.get("name")
+
     assert city_name == "Amsterdam"
   end
 
@@ -74,6 +77,7 @@ defmodule GetFiveDayForecastTest do
       map
       |> Map.get("city")
       |> Map.get("name")
+
     assert city_name == "Amsterdam"
   end
 
@@ -93,6 +97,7 @@ defmodule GetFiveDayForecastTest do
       map
       |> Map.get("city")
       |> Map.get("name")
+
     assert city_name == "Mountain View"
   end
 
@@ -113,6 +118,7 @@ defmodule GetFiveDayForecastTest do
       map
       |> Map.get("city")
       |> Map.get("name")
+
     assert city_name == "Warsaw"
   end
 
@@ -133,12 +139,13 @@ defmodule GetFiveDayForecastTest do
       map
       |> Map.get("city")
       |> Map.get("name")
+
     assert city_name == "Warsaw"
   end
 
   test ": can get weather data with get_five_day_forecast/1 by city id with options" do
     # given
-    city = %{id: 2759794}
+    city = %{id: 2_759_794}
     options = [units: :metric, lang: :pl]
     # when
     result = ExOwm.get_five_day_forecast([city], options)
@@ -153,6 +160,7 @@ defmodule GetFiveDayForecastTest do
       map
       |> Map.get("city")
       |> Map.get("name")
+
     assert city_name == "Amsterdam"
   end
 
@@ -173,6 +181,7 @@ defmodule GetFiveDayForecastTest do
       map
       |> Map.get("city")
       |> Map.get("name")
+
     assert city_name == "Amsterdam"
   end
 
@@ -193,6 +202,7 @@ defmodule GetFiveDayForecastTest do
       map
       |> Map.get("city")
       |> Map.get("name")
+
     assert city_name == "Mountain View"
   end
 end

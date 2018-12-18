@@ -8,9 +8,9 @@ defmodule ExOwm.Application do
 
     children = [
       supervisor(ExOwm.Supervisor, []),
-      supervisor(ExOwm.Cache.CurrentWeather, []),
-      supervisor(ExOwm.Cache.FiveDayForecast, []),
-      supervisor(ExOwm.Cache.SixteenDayForecast, [])
+      supervisor(ExOwm.CurrentWeather.Cache, []),
+      supervisor(ExOwm.FiveDayForecast.Cache, []),
+      supervisor(ExOwm.SixteenDayForecast.Cache, [])
     ]
 
     Supervisor.start_link(children, strategy: :one_for_one)

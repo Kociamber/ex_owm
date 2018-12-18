@@ -1,3 +1,3 @@
-defmodule ExOwm.Cache.CurrentWeather do
+defmodule ExOwm.SixteenDayForecast.Cache do
   use Nebulex.Cache, otp_app: :ex_owm, adapter: Nebulex.Adapters.Local
 end

@@ -1,5 +1,4 @@
 defmodule ExOwm do
-  alias ExOwm.Coordinator
   require Logger
 
   @moduledoc """
@@ -45,8 +44,8 @@ defmodule ExOwm do
   """
   @spec get_current_weather(requests, options) :: map
   def get_current_weather(locations, opts \\ []) when is_list(locations) do
-    Coordinator.start_workers(:get_current_weather, locations, opts)
-    Coordinator.get_state()
+    ExOwm.CurentWeather.Coordinator.start_workers(locations, opts)
+    ExOwm.CurentWeather.Coordinator.get_state()
   end
 
   @doc """
@@ -59,8 +58,8 @@ defmodule ExOwm do
   """
   @spec get_five_day_forecast(requests, options) :: map
   def get_five_day_forecast(locations, opts \\ []) when is_list(locations) do
-    Coordinator.start_workers(:get_five_day_forecast, locations, opts)
-    Coordinator.get_state()
+    ExOwm.FiveDayForecast.Coordinator.start_workers(locations, opts)
+    ExOwm.FiveDayForecast.Coordinator.get_state()
   end
 
   @doc """
@@ -73,7 +72,7 @@ defmodule ExOwm do
   """
   @spec get_sixteen_day_forecast(requests, options) :: map
   def get_sixteen_day_forecast(locations, opts \\ []) when is_list(locations) do
-    Coordinator.start_workers(:get_sixteen_day_forecast, locations, opts)
-    Coordinator.get_state()
+    ExOwm.SixteenDayForecast.Coordinator.start_workers(locations, opts)
+    ExOwm.SixteenDayForecast.Coordinator.get_state()
   end
 end
