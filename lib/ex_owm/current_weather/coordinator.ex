@@ -34,9 +34,9 @@ defmodule ExOwm.CurentWeather.Coordinator do
 
   defp spawn_worker_tasks(locations, opts) do
     worker_tasks =
-          Enum.map(locations, fn location ->
-            Task.async(Worker, :get_current_weather, [location, opts])
-          end)
+      Enum.map(locations, fn location ->
+        Task.async(Worker, :get_current_weather, [location, opts])
+      end)
 
     results = Enum.map(worker_tasks, fn task -> Task.await(task) end)
     {:reply, results, results}

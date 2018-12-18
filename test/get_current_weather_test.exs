@@ -33,7 +33,7 @@ defmodule GetCurrentWeatherTest do
 
   test ": can get weather data with get_current_weather/1 by city id" do
     # given
-    city = %{id: 2759794}
+    city = %{id: 2_759_794}
     # when
     result = ExOwm.get_current_weather([city])
     # then
@@ -110,7 +110,7 @@ defmodule GetCurrentWeatherTest do
 
   test ": can get weather data with get_current_weather/1 by city id with options" do
     # given
-    city = %{id: 2759794}
+    city = %{id: 2_759_794}
     options = [units: :metric, lang: :pl]
     # when
     result = ExOwm.get_current_weather([city], options)

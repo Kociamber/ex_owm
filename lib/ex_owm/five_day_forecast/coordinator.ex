@@ -34,9 +34,9 @@ defmodule ExOwm.FiveDayForecast.Coordinator do
 
   defp spawn_worker_tasks(locations, opts) do
     worker_tasks =
-          Enum.map(locations, fn location ->
-            Task.async(Worker, :get_five_day_forecast, [location, opts])
-          end)
+      Enum.map(locations, fn location ->
+        Task.async(Worker, :get_five_day_forecast, [location, opts])
+      end)
 
     results = Enum.map(worker_tasks, fn task -> Task.await(task) end)
     {:reply, results, results}

@@ -18,6 +18,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
       map
       |> Map.get("city")
       |> Map.get("name")
+
     assert city_name == "Warsaw"
   end
 
@@ -38,13 +39,14 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
       map
       |> Map.get("city")
       |> Map.get("name")
+
     assert city_name == "Warsaw"
   end
 
   @tag :skip
   test ": can get weather data with get_sixteen_day_forecast/1 by city id" do
     # given
-    city = %{id: 2759794}
+    city = %{id: 2_759_794}
     # when
     result = ExOwm.get_sixteen_day_forecast([city])
     # then
@@ -58,6 +60,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
       map
       |> Map.get("city")
       |> Map.get("name")
+
     assert city_name == "Amsterdam"
   end
 
@@ -78,6 +81,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
       map
       |> Map.get("city")
       |> Map.get("name")
+
     assert city_name == "Amsterdam"
   end
 
@@ -98,6 +102,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
       map
       |> Map.get("city")
       |> Map.get("name")
+
     assert city_name == "Mountain View"
   end
 
@@ -119,6 +124,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
       map
       |> Map.get("city")
       |> Map.get("name")
+
     assert city_name == "Warsaw"
   end
 
@@ -140,13 +146,14 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
       map
       |> Map.get("city")
       |> Map.get("name")
+
     assert city_name == "Warsaw"
   end
 
   @tag :skip
   test ": can get weather data with get_sixteen_day_forecast/1 by city id with options" do
     # given
-    city = %{id: 2759794}
+    city = %{id: 2_759_794}
     options = [units: :metric, lang: :pl]
     # when
     result = ExOwm.get_sixteen_day_forecast([city], options)
@@ -161,6 +168,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
       map
       |> Map.get("city")
       |> Map.get("name")
+
     assert city_name == "Amsterdam"
   end
 
@@ -182,6 +190,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
       map
       |> Map.get("city")
       |> Map.get("name")
+
     assert city_name == "Amsterdam"
   end
 
@@ -203,6 +212,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
       map
       |> Map.get("city")
       |> Map.get("name")
+
     assert city_name == "Mountain View"
   end
 end
