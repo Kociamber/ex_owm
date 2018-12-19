@@ -15,6 +15,10 @@ defp deps() do
 end
 ```
 
+## Upgrade from 1.0.X
+
+**Please re-factor** your configuration and paste below one once again as module naming (specifically the order) has slightly changed!
+
 ## Configuration
 
 In order to be able to use OWM APIs, you need to [register](https://home.openweathermap.org/users/sign_up) free account and get free API KEY.
