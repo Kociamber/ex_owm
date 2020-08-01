@@ -11,11 +11,7 @@ defmodule ExOwm.FiveDayForecast.Coordinator do
     GenServer.start_link(__MODULE__, %{}, options ++ [name: :five_day_forecast_coordinator])
   end
 
-  def get_state do
-    GenServer.call(:five_day_forecast_coordinator, {:get_state})
-  end
-
-  def start_workers(locations, opts) do
+  def get_weather(locations, opts) do
     GenServer.call(:five_day_forecast_coordinator, {:get_five_day_forecast, locations, opts})
   end
 

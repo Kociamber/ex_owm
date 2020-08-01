@@ -11,11 +11,7 @@ defmodule ExOwm.SixteenDayForecast.Coordinator do
     GenServer.start_link(__MODULE__, %{}, options ++ [name: :sixteen_day_forecast_coordinator])
   end
 
-  def get_state do
-    GenServer.call(:sixteen_day_forecast_coordinator, {:get_state})
-  end
-
-  def start_workers(locations, opts) do
+  def get_weather(locations, opts) do
     GenServer.call(
       :sixteen_day_forecast_coordinator,
       {:get_sixteen_day_forecast, locations, opts}

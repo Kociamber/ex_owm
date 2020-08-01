@@ -45,8 +45,7 @@ defmodule ExOwm do
   @spec get_current_weather(requests, options) :: map
   def get_current_weather(loc, opts \\ [])
   def get_current_weather(locations, opts) when is_list(locations) do
-    ExOwm.CurentWeather.Coordinator.start_workers(locations, opts)
-    ExOwm.CurentWeather.Coordinator.get_state()
+    ExOwm.CurentWeather.Coordinator.get_weather(locations, opts)
   end
 
   def get_current_weather(location, opts) when is_bitstring(location) or is_map(location), do: get_current_weather([location], opts)
@@ -61,8 +60,7 @@ defmodule ExOwm do
   """
   @spec get_five_day_forecast(requests, options) :: map
   def get_five_day_forecast(locations, opts \\ []) when is_list(locations) do
-    ExOwm.FiveDayForecast.Coordinator.start_workers(locations, opts)
-    ExOwm.FiveDayForecast.Coordinator.get_state()
+    ExOwm.FiveDayForecast.Coordinator.get_weather(locations, opts)
   end
 
   @doc """
@@ -75,7 +73,6 @@ defmodule ExOwm do
   """
   @spec get_sixteen_day_forecast(requests, options) :: map
   def get_sixteen_day_forecast(locations, opts \\ []) when is_list(locations) do
-    ExOwm.SixteenDayForecast.Coordinator.start_workers(locations, opts)
-    ExOwm.SixteenDayForecast.Coordinator.get_state()
+    ExOwm.SixteenDayForecast.Coordinator.get_weather(locations, opts)
   end
 end

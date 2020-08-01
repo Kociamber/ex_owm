@@ -11,11 +11,7 @@ defmodule ExOwm.CurentWeather.Coordinator do
     GenServer.start_link(__MODULE__, %{}, options ++ [name: :current_weather_coordinator])
   end
 
-  def get_state do
-    GenServer.call(:current_weather_coordinator, {:get_state})
-  end
-
-  def start_workers(locations, opts) do
+  def get_weather(locations, opts) do
     GenServer.call(:current_weather_coordinator, {:get_current_weather, locations, opts})
   end
 
