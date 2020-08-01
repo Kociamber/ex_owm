@@ -3,6 +3,21 @@ defmodule GetCurrentWeatherTest do
 
   test ": can get weather data with get_current_weather/1 by city name" do
     # given
+    city = %{city: "Bengaluru"}
+    # when
+    result = ExOwm.get_current_weather(city)
+    # then
+    # check whether a list of maps is returned
+    assert is_list(result)
+    assert result != []
+    map = List.first(result)
+    assert is_map(map)
+    # check whether map has specific keys to confirm that request was successful
+    assert Map.get(map, "name") == "Bengaluru"
+  end
+
+  test ": can get weather data with get_current_weather/1 by city name list" do
+    # given
     city = %{city: "Lucerne"}
     # when
     result = ExOwm.get_current_weather([city])
