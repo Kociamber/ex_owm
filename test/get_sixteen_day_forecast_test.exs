@@ -1,4 +1,4 @@
-defmodule Getget_sixteen_day_forecastDaySixteenTest do
+defmodule GetSixteenDayForecastTest do
   use ExUnit.Case
 
   @tag :skip
