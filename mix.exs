@@ -11,11 +11,11 @@ defmodule ExOwm.Mixfile do
       source_url: @github_url,
       homepage_url: @github_url,
       package: [
-        maintainers: ["Rafał Kociszewski"],
+        maintainers: ["Rafał Kociszewski", "Joe Eifert"],
         licenses: ["MIT"],
         links: %{"GitHub" => @github_url}
       ],
-      elixir: "~> 1.7",
+      elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       docs: [
@@ -36,11 +36,11 @@ defmodule ExOwm.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:httpoison, "~> 1.4"},
-      {:poison, "~> 3.1"},
-      {:nebulex, "~> 1.0.0"},
-      {:ex_doc, "~> 0.19", only: :dev, runtime: false},
-      {:credo, "~> 0.10.0", only: [:dev, :test], runtime: false}
+      {:httpoison, "~> 1.7"},
+      {:poison, "~> 4.0"},
+      {:nebulex, "~> 1.2"},
+      {:ex_doc, "~> 0.22", only: :dev, runtime: false},
+      {:credo, "~> 1.4", only: [:dev, :test], runtime: false}
     ]
   end
 end

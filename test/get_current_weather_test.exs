@@ -3,7 +3,7 @@ defmodule GetCurrentWeatherTest do
 
   test ": can get weather data with get_current_weather/1 by city name" do
     # given
-    city = %{city: "Warsaw"}
+    city = %{city: "Lucerne"}
     # when
     result = ExOwm.get_current_weather([city])
     # then
@@ -13,12 +13,12 @@ defmodule GetCurrentWeatherTest do
     map = List.first(result)
     assert is_map(map)
     # check wether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Warsaw"
+    assert Map.get(map, "name") == "Lucerne"
   end
 
   test ": can get weather data with get_current_weather/1 by city name and country code" do
     # given
-    city = %{city: "Warsaw", countr_code: "pl"}
+    city = %{city: "Munich", countr_code: "de"}
     # when
     result = ExOwm.get_current_weather([city])
     # then
@@ -28,7 +28,7 @@ defmodule GetCurrentWeatherTest do
     map = List.first(result)
     assert is_map(map)
     # check wether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Warsaw"
+    assert Map.get(map, "name") == "Munich"
   end
 
   test ": can get weather data with get_current_weather/1 by city id" do
@@ -89,7 +89,7 @@ defmodule GetCurrentWeatherTest do
     map = List.first(result)
     assert is_map(map)
     # check wether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Warsaw"
+    assert Map.get(map, "name") == "Warszawa"
   end
 
   test ": can get weather data with get_current_weather/1 by city name and country code with options" do
@@ -105,7 +105,7 @@ defmodule GetCurrentWeatherTest do
     map = List.first(result)
     assert is_map(map)
     # check wether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Warsaw"
+    assert Map.get(map, "name") == "Warszawa"
   end
 
   test ": can get weather data with get_current_weather/1 by city id with options" do

@@ -18,7 +18,7 @@ defmodule GetFiveDayForecastTest do
       |> Map.get("city")
       |> Map.get("name")
 
-    assert city_name == "Warsaw"
+    assert city_name == "Warszawa"
   end
 
   test ": can get weather data with get_five_day_forecast/1 by city name and country code" do
@@ -119,13 +119,13 @@ defmodule GetFiveDayForecastTest do
       |> Map.get("city")
       |> Map.get("name")
 
-    assert city_name == "Warsaw"
+    assert city_name == "Warszawa"
   end
 
   test ": can get weather data with get_five_day_forecast/1 by city name and country code with options" do
     # given
-    city = %{city: "Warsaw", countr_code: "pl"}
-    options = [units: :metric, lang: :pl]
+    city = %{city: "Freiburg", countr_code: "ch"}
+    options = [units: :metric, lang: :fr]
     # when
     result = ExOwm.get_five_day_forecast([city], options)
     # then
@@ -140,7 +140,9 @@ defmodule GetFiveDayForecastTest do
       |> Map.get("city")
       |> Map.get("name")
 
-    assert city_name == "Warsaw"
+    # Fribourg or Freiburg is a city which exists in multiple countries and in multiple languages
+    assert city_name == "Fribourg"
+    assert %{"city" => %{"country" => "CH"}} = map
   end
 
   test ": can get weather data with get_five_day_forecast/1 by city id with options" do
