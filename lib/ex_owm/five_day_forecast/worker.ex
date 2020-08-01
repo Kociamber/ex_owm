@@ -7,7 +7,7 @@ defmodule ExOwm.FiveDayForecast.Worker do
 
   @doc """
   Returns five day weather forecast for a specific location and given options.
-  Checks wether request has been already cached, if not it sends the request to
+  Checks whether request has been already cached, if not it sends the request to
   OWM API and caches it with specific TTL.
   """
   @spec get_five_day_forecast(map, key: atom) :: map

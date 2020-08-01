@@ -7,7 +7,7 @@ defmodule ExOwm.CurentWeather.Worker do
 
   @doc """
   Returns current weather for a specific location and given options.
-  Checks wether request has been already cached, if not it sends the request to
+  Checks whether request has been already cached, if not it sends the request to
   OWM API and caches it with specific TTL.
   """
   @spec get_current_weather(map, key: atom) :: map

@@ -27,7 +27,7 @@ defmodule GetCurrentWeatherTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
+    # check whether map has specific keys to confirm that request was successful
     assert Map.get(map, "name") == "Lucerne"
   end
 
@@ -42,7 +42,7 @@ defmodule GetCurrentWeatherTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
+    # check whether map has specific keys to confirm that request was successful
     assert Map.get(map, "name") == "Munich"
   end
 
@@ -57,7 +57,7 @@ defmodule GetCurrentWeatherTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
+    # check whether map has specific keys to confirm that request was successful
     assert Map.get(map, "name") == "Amsterdam"
   end
 
@@ -72,7 +72,7 @@ defmodule GetCurrentWeatherTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
+    # check whether map has specific keys to confirm that request was successful
     assert Map.get(map, "name") == "Amsterdam"
   end
 
@@ -87,7 +87,7 @@ defmodule GetCurrentWeatherTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
+    # check whether map has specific keys to confirm that request was successful
     assert Map.get(map, "name") == "Mountain View"
   end
 
@@ -103,7 +103,7 @@ defmodule GetCurrentWeatherTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
+    # check whether map has specific keys to confirm that request was successful
     assert Map.get(map, "name") == "Warszawa"
   end
 
@@ -119,7 +119,7 @@ defmodule GetCurrentWeatherTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
+    # check whether map has specific keys to confirm that request was successful
     assert Map.get(map, "name") == "Warszawa"
   end
 
@@ -135,7 +135,7 @@ defmodule GetCurrentWeatherTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
+    # check whether map has specific keys to confirm that request was successful
     assert Map.get(map, "name") == "Amsterdam"
   end
 
@@ -151,7 +151,7 @@ defmodule GetCurrentWeatherTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
+    # check whether map has specific keys to confirm that request was successful
     assert Map.get(map, "name") == "Amsterdam"
   end
 
@@ -167,7 +167,7 @@ defmodule GetCurrentWeatherTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
+    # check whether map has specific keys to confirm that request was successful
     assert Map.get(map, "name") == "Mountain View"
   end
 end

@@ -13,7 +13,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific value to confirm that request was successful
+    # check whether map has specific value to confirm that request was successful
     city_name =
       map
       |> Map.get("city")
@@ -34,7 +34,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific value to confirm that request was successful
+    # check whether map has specific value to confirm that request was successful
     city_name =
       map
       |> Map.get("city")
@@ -55,7 +55,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific value to confirm that request was successful
+    # check whether map has specific value to confirm that request was successful
     city_name =
       map
       |> Map.get("city")
@@ -76,7 +76,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific value to confirm that request was successful
+    # check whether map has specific value to confirm that request was successful
     city_name =
       map
       |> Map.get("city")
@@ -97,7 +97,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific value to confirm that request was successful
+    # check whether map has specific value to confirm that request was successful
     city_name =
       map
       |> Map.get("city")
@@ -119,7 +119,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific value to confirm that request was successful
+    # check whether map has specific value to confirm that request was successful
     city_name =
       map
       |> Map.get("city")
@@ -141,7 +141,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific value to confirm that request was successful
+    # check whether map has specific value to confirm that request was successful
     city_name =
       map
       |> Map.get("city")
@@ -163,7 +163,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific value to confirm that request was successful
+    # check whether map has specific value to confirm that request was successful
     city_name =
       map
       |> Map.get("city")
@@ -185,7 +185,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific value to confirm that request was successful
+    # check whether map has specific value to confirm that request was successful
     city_name =
       map
       |> Map.get("city")
@@ -207,7 +207,7 @@ defmodule Getget_sixteen_day_forecastDaySixteenTest do
     assert result != []
     map = List.first(result)
     assert is_map(map)
-    # check wether map has specific value to confirm that request was successful
+    # check whether map has specific value to confirm that request was successful
     city_name =
       map
       |> Map.get("city")
