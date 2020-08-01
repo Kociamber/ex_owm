@@ -62,13 +62,13 @@ There are three main public interface functions for each API and they accepts th
 Sample API calls may look following:
 ```elixir
 ExOwm.get_current_weather([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl)
-{:ok, %{WEATHER_DATA}}
+[{:ok, %{WARSAW_DATA}}, {:ok, %{LONDON_DATA}}]
 
 ExOwm.get_five_day_forecast([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl)
-{:ok, %{WEATHER_DATA}}
+[{:ok, %{WARSAW_DATA}}, {:ok, %{LONDON_DATA}}]
 
-ExOwm.get_sixteen_day_forecast([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl, cnt: 16)
-{:ok, %{WEATHER_DATA}}
+ExOwm.get_sixteen_day_forecast([%{city: "Warsaw"}, %{city: "unknown City Name", country_code: "uk"}], units: :metric, lang: :pl, cnt: 16)
+[{:ok, %{WARSAW_DATA}}, {:error, :not_found, %{"cod" => "404", "message" => "city not found"}}]
 ```
 
 Please refer to official [docs](https://hexdocs.pm/ex_owm/readme.html) for more details.

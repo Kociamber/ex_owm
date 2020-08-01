@@ -10,7 +10,7 @@ defmodule GetFiveDayForecastTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
     # check whether map has specific value to confirm that request was successful
     city_name =
@@ -30,7 +30,7 @@ defmodule GetFiveDayForecastTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
     # check whether map has specific value to confirm that request was successful
     city_name =
@@ -50,7 +50,7 @@ defmodule GetFiveDayForecastTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
     # check whether map has specific value to confirm that request was successful
     city_name =
@@ -70,7 +70,7 @@ defmodule GetFiveDayForecastTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
     # check whether map has specific value to confirm that request was successful
     city_name =
@@ -90,7 +90,7 @@ defmodule GetFiveDayForecastTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
     # check whether map has specific value to confirm that request was successful
     city_name =
@@ -110,7 +110,7 @@ defmodule GetFiveDayForecastTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
     # check whether map has specific value to confirm that request was successful
     city_name =
@@ -131,7 +131,7 @@ defmodule GetFiveDayForecastTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
     # check whether map has specific value to confirm that request was successful
     city_name =
@@ -152,7 +152,7 @@ defmodule GetFiveDayForecastTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
     # check whether map has specific value to confirm that request was successful
     city_name =
@@ -175,7 +175,7 @@ defmodule GetFiveDayForecastTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
     # check whether map has specific value to confirm that request was successful
     city_name =
@@ -196,7 +196,7 @@ defmodule GetFiveDayForecastTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
     # check whether map has specific value to confirm that request was successful
     city_name =
@@ -217,7 +217,7 @@ defmodule GetFiveDayForecastTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
     # check whether map has specific value to confirm that request was successful
     city_name =
