@@ -44,11 +44,13 @@ defmodule ExOwm do
   """
   @spec get_current_weather(requests, options) :: map
   def get_current_weather(loc, opts \\ [])
+
   def get_current_weather(locations, opts) when is_list(locations) do
     ExOwm.CurentWeather.Coordinator.get_weather(locations, opts)
   end
 
-  def get_current_weather(location, opts) when is_bitstring(location) or is_map(location), do: get_current_weather([location], opts)
+  def get_current_weather(location, opts) when is_map(location),
+    do: get_current_weather([location], opts)
 
   @doc """
   Gets 5 day forecast data of the given location with specified options.
@@ -59,9 +61,14 @@ defmodule ExOwm do
 
   """
   @spec get_five_day_forecast(requests, options) :: map
-  def get_five_day_forecast(locations, opts \\ []) when is_list(locations) do
+  def get_five_day_forecast(locations, opts \\ [])
+
+  def get_five_day_forecast(locations, opts) when is_list(locations) do
     ExOwm.FiveDayForecast.Coordinator.get_weather(locations, opts)
   end
+
+  def get_five_day_forecast(location, opts) when is_map(location),
+    do: get_five_day_forecast([location], opts)
 
   @doc """
   Gets 1 to 16 days forecast data of the given location with specified options.
@@ -72,7 +79,12 @@ defmodule ExOwm do
 
   """
   @spec get_sixteen_day_forecast(requests, options) :: map
-  def get_sixteen_day_forecast(locations, opts \\ []) when is_list(locations) do
+  def get_sixteen_day_forecast(locations, opts \\ [])
+
+  def get_sixteen_day_forecast(locations, opts) when is_list(locations) do
     ExOwm.SixteenDayForecast.Coordinator.get_weather(locations, opts)
   end
+
+  def get_sixteen_day_forecast(location, opts) when is_map(location),
+    do: get_sixteen_day_forecast([location], opts)
 end

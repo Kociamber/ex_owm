@@ -2,6 +2,27 @@ defmodule GetSixteenDayForecastTest do
   use ExUnit.Case
 
   @tag :skip
+  test ": can get weather data with get_sixteen_day_forecast/1 by single city name" do
+    # given
+    city = %{city: "Warsaw"}
+    # when
+    result = ExOwm.get_sixteen_day_forecast(city)
+    # then
+    # check whether a list of maps is returned
+    assert is_list(result)
+    assert result != []
+    map = List.first(result)
+    assert is_map(map)
+    # check whether map has specific value to confirm that request was successful
+    city_name =
+      map
+      |> Map.get("city")
+      |> Map.get("name")
+
+    assert city_name == "Warsaw"
+  end
+
+  @tag :skip
   test ": can get weather data with get_sixteen_day_forecast/1 by city name" do
     # given
     city = %{city: "Warsaw"}
