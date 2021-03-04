@@ -1,12 +1,12 @@
 defmodule ExOwm.Mixfile do
   use Mix.Project
-  @github_url "https://github.com/johannesE/ex_owm"
+  @github_url "https://github.com/Kociamber/ex_owm"
 
   def project do
     [
       app: :ex_owm,
       name: "ExOwm",
-      version: "1.2.0",
+      version: "1.2.1",
       description: "OpenWeatherMap API Elixir client.",
       source_url: @github_url,
       homepage_url: @github_url,
