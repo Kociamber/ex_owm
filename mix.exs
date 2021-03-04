@@ -1,6 +1,6 @@
 defmodule ExOwm.Mixfile do
   use Mix.Project
-  @github_url "https://github.com/Kociamber/ex_owm"
+  @github_url "https://github.com/johannesE/ex_owm"
 
   def project do
     [

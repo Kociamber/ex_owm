@@ -52,6 +52,7 @@ config :ex_owm, ExOwm.SixteenDayForecast.Cache,
 ExOwm is currently handling three main OpenWeatherMap [APIs](http://openweathermap.org/api):
 
 *   [Current weather data](http://openweathermap.org/current)
+*   [One Call API](https://openweathermap.org/api/one-call-api)
 *   [5 day / 3 hour forecast](http://openweathermap.org/forecast5)
 *   [1 - 16 day / daily forecast](http://openweathermap.org/forecast16)
 
