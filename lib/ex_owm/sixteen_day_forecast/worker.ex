@@ -12,11 +12,11 @@ defmodule ExOwm.SixteenDayForecast.Worker do
   """
   @spec get_sixteen_day_forecast(map, key: atom) :: map
   def get_sixteen_day_forecast(location, opts) do
-    case Cache.get(location) do
+    case Cache.get("16_day_forecast: #{inspect(location)}") do
       # If location wasn't cached within last 10 minutes, call OWM API
       nil ->
         result = Api.send_and_parse_request(:get_sixteen_day_forecast, location, opts)
-        Cache.set(location, result, ttl: :infinity)
+        Cache.set("16_day_forecast: #{inspect(location)}", result, ttl: :timer.minutes(10))
 
       # If location was cached, return it
       location ->

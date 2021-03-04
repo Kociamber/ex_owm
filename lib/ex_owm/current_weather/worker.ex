@@ -12,11 +12,11 @@ defmodule ExOwm.CurrentWeather.Worker do
   """
   @spec get_current_weather(map, key: atom) :: map
   def get_current_weather(location, opts) do
-    case Cache.get(location) do
+    case Cache.get("current_weather: #{inspect(location)}") do
       # If location wasn't cached within last 10 minutes, call OWM API
       nil ->
         result = Api.send_and_parse_request(:get_current_weather, location, opts)
-        Cache.set(location, result, ttl: :infinity)
+        Cache.set("current_weather: #{inspect(location)}", result, ttl: :timer.minutes(10))
 
       # If location was cached, return it
       location ->
