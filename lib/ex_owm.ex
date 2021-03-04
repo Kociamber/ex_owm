@@ -46,11 +46,30 @@ defmodule ExOwm do
   def get_current_weather(loc, opts \\ [])
 
   def get_current_weather(locations, opts) when is_list(locations) do
-    ExOwm.CurentWeather.Coordinator.get_weather(locations, opts)
+    ExOwm.CurrentWeather.Coordinator.get_weather(locations, opts)
   end
 
   def get_current_weather(location, opts) when is_map(location),
     do: get_current_weather([location], opts)
+
+  @doc """
+  Gets weather data of the given location with specified options.
+
+  ## Examples
+
+      iex> ExOwm.get_weather([%{lat: 52.374031, lon: 4.88969}], units: :metric, lang: :pl)
+
+  """
+  @spec get_weather(requests, options) :: map
+  def get_weather(loc, opts \\ [])
+
+  def get_weather(locations, opts) when is_list(locations) do
+    ExOwm.Weather.Coordinator.get_weather(locations, opts)
+  end
+
+  def get_weather(location, opts) when is_map(location),
+      do: get_weather([location], opts)
+
 
   @doc """
   Gets 5 day forecast data of the given location with specified options.

@@ -1,6 +1,6 @@
 defmodule ExOwm.RequestString do
   @moduledoc """
-  Request string cretion.
+  Request string creation.
   """
 
   # 5 day forecast is available at any location or city.
@@ -20,8 +20,11 @@ defmodule ExOwm.RequestString do
     |> add_day_count()
     |> add_language_substring()
     |> add_api_key_substring()
-    |> IO.inspect
   end
+
+  # One call weather call.
+  defp add_prefix_substring({:get_weather, location, opts}),
+    do: {"api.openweathermap.org/data/2.5/onecall", location, opts}
 
   # Current weather call.
   defp add_prefix_substring({:get_current_weather, location, opts}),
