@@ -83,7 +83,7 @@ defmodule GetFiveDayForecastTest do
 
   test ": can get weather data with get_five_day_forecast/1 by latitude and longitude" do
     # given
-    city = %{lat: 52.374031, lon: 4.88969}
+    city = %{lat: 4.3942822222, lon: 18.558442503}
     # when
     result = ExOwm.get_five_day_forecast([city])
     # then
@@ -98,7 +98,7 @@ defmodule GetFiveDayForecastTest do
       |> Map.get("city")
       |> Map.get("name")
 
-    assert city_name == "Amsterdam"
+    assert city_name == "Kolongo"
   end
 
   test ": can get weather data with get_five_day_forecast/1 by zip and country code" do

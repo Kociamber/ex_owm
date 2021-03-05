@@ -3,7 +3,7 @@ defmodule ExOwm.Weather.Worker do
   Current Weather Worker task implementation.
   """
   alias ExOwm.Api
-  alias ExOwm.CurrentWeather.Cache
+  alias ExOwm.Cache
 
   @doc """
   Returns current weather for a specific location and given options.
@@ -16,7 +16,8 @@ defmodule ExOwm.Weather.Worker do
       # If location wasn't cached within last 10 minutes, call OWM API
       nil ->
         result = Api.send_and_parse_request(:get_weather, location, opts)
-        Cache.set("one_call: #{inspect(location)}", result, ttl: :timer.minutes(10))
+        Cache.put("one_call: #{inspect(location)}", result, ttl: :timer.minutes(10))
+        result
 
       # If location was cached, return it
       location ->

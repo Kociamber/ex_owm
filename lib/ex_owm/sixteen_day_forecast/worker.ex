@@ -3,7 +3,7 @@ defmodule ExOwm.SixteenDayForecast.Worker do
   Sixteen Day Forecast Worker task implementation.
   """
   alias ExOwm.Api
-  alias ExOwm.SixteenDayForecast.Cache
+  alias ExOwm.Cache
 
   @doc """
   Returns sixteen day weather forecast for a specific location and given options.
@@ -16,7 +16,8 @@ defmodule ExOwm.SixteenDayForecast.Worker do
       # If location wasn't cached within last 10 minutes, call OWM API
       nil ->
         result = Api.send_and_parse_request(:get_sixteen_day_forecast, location, opts)
-        Cache.set("16_day_forecast: #{inspect(location)}", result, ttl: :timer.minutes(10))
+        Cache.put("16_day_forecast: #{inspect(location)}", result, ttl: :timer.minutes(10))
+        result
 
       # If location was cached, return it
       location ->

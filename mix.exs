@@ -38,7 +38,7 @@ defmodule ExOwm.Mixfile do
     [
       {:httpoison, "~> 1.7"},
       {:poison, "~> 4.0"},
-      {:nebulex, "~> 1.2"},
+      {:nebulex, "~> 2.0"},
       {:ex_doc, "~> 0.22", only: :dev, runtime: false},
       {:credo, "~> 1.4", only: [:dev, :test], runtime: false}
     ]

@@ -16,7 +16,7 @@ defmodule GetOneCallWeatherTest do
     assert Map.get(map, "current") |> Map.get("temp") > 200 # kelvin, we should be fine here
   end
 
-  test ": can get weather data with get_current_weather/1 by latitude and longitude with options" do
+  test ": can get weather data with get_weather/1 by latitude and longitude with options" do
     # given
     city = %{lat: 46.514098, lon: 8.326755}
     options = [units: :metric, lang: :ru]
