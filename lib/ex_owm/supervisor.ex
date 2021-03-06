@@ -13,7 +13,8 @@ defmodule ExOwm.Supervisor do
   ## Server implementation
   def init(_) do
     children = [
-      worker(ExOwm.CurentWeather.Coordinator, []),
+      worker(ExOwm.CurrentWeather.Coordinator, []),
+      worker(ExOwm.Weather.Coordinator, []),
       worker(ExOwm.FiveDayForecast.Coordinator, []),
       worker(ExOwm.SixteenDayForecast.Coordinator, [])
     ]

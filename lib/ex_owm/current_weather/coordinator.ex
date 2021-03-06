@@ -1,21 +1,17 @@
-defmodule ExOwm.CurentWeather.Coordinator do
+defmodule ExOwm.CurrentWeather.Coordinator do
   @moduledoc """
   This module is a GenServer implementation created for handling concurrent
   worker task coordination.
   """
   use GenServer
-  alias ExOwm.CurentWeather.Worker
+  alias ExOwm.CurrentWeather.Worker
 
   ## Client API
   def start_link(options \\ []) do
     GenServer.start_link(__MODULE__, %{}, options ++ [name: :current_weather_coordinator])
   end
 
-  def get_state do
-    GenServer.call(:current_weather_coordinator, {:get_state})
-  end
-
-  def start_workers(locations, opts) do
+  def get_weather(locations, opts) do
     GenServer.call(:current_weather_coordinator, {:get_current_weather, locations, opts})
   end
 

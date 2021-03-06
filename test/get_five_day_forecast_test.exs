@@ -1,24 +1,44 @@
 defmodule GetFiveDayForecastTest do
   use ExUnit.Case
 
+  test ": can get weather data with get_five_day_forecast/1 by single city name" do
+    # given
+    city = %{city: "Sochi"}
+    # when
+    result = ExOwm.get_five_day_forecast(city)
+    # then
+    # check whether a list of maps is returned
+    assert is_list(result)
+    assert result != []
+    {:ok, map} = List.first(result)
+    assert is_map(map)
+    # check whether map has specific value to confirm that request was successful
+    city_name =
+      map
+      |> Map.get("city")
+      |> Map.get("name")
+
+    assert city_name == "Sochi"
+  end
+
   test ": can get weather data with get_five_day_forecast/1 by city name" do
     # given
-    city = %{city: "Warsaw"}
+    city = %{city: "Sochi"}
     # when
     result = ExOwm.get_five_day_forecast([city])
     # then
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
-    # check wether map has specific value to confirm that request was successful
+    # check whether map has specific value to confirm that request was successful
     city_name =
       map
       |> Map.get("city")
       |> Map.get("name")
 
-    assert city_name == "Warsaw"
+    assert city_name == "Sochi"
   end
 
   test ": can get weather data with get_five_day_forecast/1 by city name and country code" do
@@ -30,9 +50,9 @@ defmodule GetFiveDayForecastTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
-    # check wether map has specific value to confirm that request was successful
+    # check whether map has specific value to confirm that request was successful
     city_name =
       map
       |> Map.get("city")
@@ -50,9 +70,9 @@ defmodule GetFiveDayForecastTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
-    # check wether map has specific value to confirm that request was successful
+    # check whether map has specific value to confirm that request was successful
     city_name =
       map
       |> Map.get("city")
@@ -63,22 +83,22 @@ defmodule GetFiveDayForecastTest do
 
   test ": can get weather data with get_five_day_forecast/1 by latitude and longitude" do
     # given
-    city = %{lat: 52.374031, lon: 4.88969}
+    city = %{lat: 4.3942822222, lon: 18.558442503}
     # when
     result = ExOwm.get_five_day_forecast([city])
     # then
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
-    # check wether map has specific value to confirm that request was successful
+    # check whether map has specific value to confirm that request was successful
     city_name =
       map
       |> Map.get("city")
       |> Map.get("name")
 
-    assert city_name == "Amsterdam"
+    assert city_name == "Kolongo"
   end
 
   test ": can get weather data with get_five_day_forecast/1 by zip and country code" do
@@ -90,9 +110,9 @@ defmodule GetFiveDayForecastTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
-    # check wether map has specific value to confirm that request was successful
+    # check whether map has specific value to confirm that request was successful
     city_name =
       map
       |> Map.get("city")
@@ -103,44 +123,46 @@ defmodule GetFiveDayForecastTest do
 
   test ": can get weather data with get_five_day_forecast/1 by city name with options" do
     # given
-    city = %{city: "Warsaw"}
-    options = [units: :metric, lang: :pl]
+    city = %{city: "Moscow"}
+    options = [units: :metric, lang: :ru]
     # when
     result = ExOwm.get_five_day_forecast([city], options)
     # then
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
-    # check wether map has specific value to confirm that request was successful
+    # check whether map has specific value to confirm that request was successful
     city_name =
       map
       |> Map.get("city")
       |> Map.get("name")
 
-    assert city_name == "Warsaw"
+    assert city_name == "Москва"
   end
 
   test ": can get weather data with get_five_day_forecast/1 by city name and country code with options" do
     # given
-    city = %{city: "Warsaw", countr_code: "pl"}
-    options = [units: :metric, lang: :pl]
+    city = %{city: "Freiburg", countr_code: "ch"}
+    options = [units: :metric, lang: :fr]
     # when
     result = ExOwm.get_five_day_forecast([city], options)
     # then
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
-    # check wether map has specific value to confirm that request was successful
+    # check whether map has specific value to confirm that request was successful
     city_name =
       map
       |> Map.get("city")
       |> Map.get("name")
 
-    assert city_name == "Warsaw"
+    # Fribourg or Freiburg is a city which exists in multiple countries and in multiple languages
+    assert city_name == "Fribourg"
+    assert %{"city" => %{"country" => "CH"}} = map
   end
 
   test ": can get weather data with get_five_day_forecast/1 by city id with options" do
@@ -153,9 +175,9 @@ defmodule GetFiveDayForecastTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
-    # check wether map has specific value to confirm that request was successful
+    # check whether map has specific value to confirm that request was successful
     city_name =
       map
       |> Map.get("city")
@@ -174,9 +196,9 @@ defmodule GetFiveDayForecastTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
-    # check wether map has specific value to confirm that request was successful
+    # check whether map has specific value to confirm that request was successful
     city_name =
       map
       |> Map.get("city")
@@ -195,9 +217,9 @@ defmodule GetFiveDayForecastTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
-    # check wether map has specific value to confirm that request was successful
+    # check whether map has specific value to confirm that request was successful
     city_name =
       map
       |> Map.get("city")

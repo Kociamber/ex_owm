@@ -52,6 +52,7 @@ config :ex_owm, ExOwm.SixteenDayForecast.Cache,
 ExOwm is currently handling three main OpenWeatherMap [APIs](http://openweathermap.org/api):
 
 *   [Current weather data](http://openweathermap.org/current)
+*   [One Call API](https://openweathermap.org/api/one-call-api)
 *   [5 day / 3 hour forecast](http://openweathermap.org/forecast5)
 *   [1 - 16 day / daily forecast](http://openweathermap.org/forecast16)
 
@@ -62,13 +63,13 @@ There are three main public interface functions for each API and they accepts th
 Sample API calls may look following:
 ```elixir
 ExOwm.get_current_weather([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl)
-{:ok, %{WEATHER_DATA}}
+[{:ok, %{WARSAW_DATA}}, {:ok, %{LONDON_DATA}}]
 
 ExOwm.get_five_day_forecast([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl)
-{:ok, %{WEATHER_DATA}}
+[{:ok, %{WARSAW_DATA}}, {:ok, %{LONDON_DATA}}]
 
-ExOwm.get_sixteen_day_forecast([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl, cnt: 16)
-{:ok, %{WEATHER_DATA}}
+ExOwm.get_sixteen_day_forecast([%{city: "Warsaw"}, %{city: "unknown City Name", country_code: "uk"}], units: :metric, lang: :pl, cnt: 16)
+[{:ok, %{WARSAW_DATA}}, {:error, :not_found, %{"cod" => "404", "message" => "city not found"}}]
 ```
 
 Please refer to official [docs](https://hexdocs.pm/ex_owm/readme.html) for more details.
@@ -81,7 +82,7 @@ ExOwm is using cool features like:
 *   super fast generational caching
 *   access to **main** [OWM APIs](http://openweathermap.org/api)!
 
-It means that each location entry passed within the list spawns separate task (Elixir worker process) which is checking wether the request has been already sent within a time interval, if yes, it's fetching the result from cache. Otherwise it sends API query, saves the result in cache and returns the data.
+It means that each location entry passed within the list spawns separate task (Elixir worker process) which is checking whether the request has been already sent within a time interval, if yes, it's fetching the result from cache. Otherwise it sends API query, saves the result in cache and returns the data.
 
 ## To do
 

@@ -32,11 +32,10 @@ defmodule ExOwm.Api do
   end
 
   defp parse_json({:ok, json}) do
-    {:ok, map} = Poison.decode(json)
-    map
+    Poison.decode(json)
   end
 
   defp parse_json({:error, reason, json_body}) do
-    {:error, reason, json_body}
+    {:error, reason, Poison.decode!(json_body)}
   end
 end

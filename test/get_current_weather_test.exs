@@ -3,32 +3,47 @@ defmodule GetCurrentWeatherTest do
 
   test ": can get weather data with get_current_weather/1 by city name" do
     # given
-    city = %{city: "Warsaw"}
+    city = %{city: "Bengaluru"}
+    # when
+    result = ExOwm.get_current_weather(city)
+    # then
+    # check whether a list of maps is returned
+    assert is_list(result)
+    assert result != []
+    {:ok, map} = List.first(result)
+    assert is_map(map)
+    # check whether map has specific keys to confirm that request was successful
+    assert Map.get(map, "name") == "Bengaluru"
+  end
+
+  test ": can get weather data with get_current_weather/1 by city name list" do
+    # given
+    city = %{city: "Lucerne"}
     # when
     result = ExOwm.get_current_weather([city])
     # then
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Warsaw"
+    # check whether map has specific keys to confirm that request was successful
+    assert Map.get(map, "name") == "Lucerne"
   end
 
   test ": can get weather data with get_current_weather/1 by city name and country code" do
     # given
-    city = %{city: "Warsaw", countr_code: "pl"}
+    city = %{city: "Munich", countr_code: "de"}
     # when
     result = ExOwm.get_current_weather([city])
     # then
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Warsaw"
+    # check whether map has specific keys to confirm that request was successful
+    assert Map.get(map, "name") == "Munich"
   end
 
   test ": can get weather data with get_current_weather/1 by city id" do
@@ -40,9 +55,9 @@ defmodule GetCurrentWeatherTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
+    # check whether map has specific keys to confirm that request was successful
     assert Map.get(map, "name") == "Amsterdam"
   end
 
@@ -55,9 +70,9 @@ defmodule GetCurrentWeatherTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
+    # check whether map has specific keys to confirm that request was successful
     assert Map.get(map, "name") == "Amsterdam"
   end
 
@@ -70,9 +85,9 @@ defmodule GetCurrentWeatherTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
+    # check whether map has specific keys to confirm that request was successful
     assert Map.get(map, "name") == "Mountain View"
   end
 
@@ -86,10 +101,10 @@ defmodule GetCurrentWeatherTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Warsaw"
+    # check whether map has specific keys to confirm that request was successful
+    assert Map.get(map, "name") == "Warszawa"
   end
 
   test ": can get weather data with get_current_weather/1 by city name and country code with options" do
@@ -102,10 +117,10 @@ defmodule GetCurrentWeatherTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Warsaw"
+    # check whether map has specific keys to confirm that request was successful
+    assert Map.get(map, "name") == "Warszawa"
   end
 
   test ": can get weather data with get_current_weather/1 by city id with options" do
@@ -118,9 +133,9 @@ defmodule GetCurrentWeatherTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
+    # check whether map has specific keys to confirm that request was successful
     assert Map.get(map, "name") == "Amsterdam"
   end
 
@@ -134,9 +149,9 @@ defmodule GetCurrentWeatherTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
+    # check whether map has specific keys to confirm that request was successful
     assert Map.get(map, "name") == "Amsterdam"
   end
 
@@ -150,9 +165,22 @@ defmodule GetCurrentWeatherTest do
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []
-    map = List.first(result)
+    {:ok, map} = List.first(result)
     assert is_map(map)
-    # check wether map has specific keys to confirm that request was successful
+    # check whether map has specific keys to confirm that request was successful
     assert Map.get(map, "name") == "Mountain View"
   end
+
+  test ": Parses errors correctly" do
+    # given
+    city = %{city: "unknown city, yes, really unknown"}
+    # when
+    result = ExOwm.get_current_weather(city)
+    # then
+    # check whether a list of maps is returned
+    assert is_list(result)
+    assert result != []
+    {:error, :not_found, %{"cod" => "404", "message" => "city not found"}} = List.first(result)
+  end
+
 end
