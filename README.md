@@ -28,31 +28,17 @@ If you are going to use this application as a dependency in your own project, yo
 
 ```elixir
 config :ex_owm, api_key: System.get_env("OWM_API_KEY")
-
-config :ex_owm, ExOwm.CurrentWeather.Cache,
-  adapter: Nebulex.Adapters.Local,
-  n_shards: 2,
-  gc_interval: 3600
-
-config :ex_owm, ExOwm.FiveDayForecast.Cache,
-  adapter: Nebulex.Adapters.Local,
-  n_shards: 2,
-  gc_interval: 3600
-
-config :ex_owm, ExOwm.SixteenDayForecast.Cache,
-  adapter: Nebulex.Adapters.Local,
-  n_shards: 2,
-  gc_interval: 3600
 ```
 
 ..and you are ready to go!
 
 ## Basic Usage
 
-ExOwm is currently handling three main OpenWeatherMap [APIs](http://openweathermap.org/api):
+ExOwm is currently handling the following main OpenWeatherMap [APIs](http://openweathermap.org/api):
 
 *   [Current weather data](http://openweathermap.org/current)
 *   [One Call API](https://openweathermap.org/api/one-call-api)
+*   [One Call API History](https://openweathermap.org/api/one-call-api#history)
 *   [5 day / 3 hour forecast](http://openweathermap.org/forecast5)
 *   [1 - 16 day / daily forecast](http://openweathermap.org/forecast16)
 
@@ -70,6 +56,11 @@ ExOwm.get_five_day_forecast([%{city: "Warsaw"}, %{city: "London", country_code: 
 
 ExOwm.get_sixteen_day_forecast([%{city: "Warsaw"}, %{city: "unknown City Name", country_code: "uk"}], units: :metric, lang: :pl, cnt: 16)
 [{:ok, %{WARSAW_DATA}}, {:error, :not_found, %{"cod" => "404", "message" => "city not found"}}]
+
+yesterday = DateTime.utc_now() |> DateTime.add(24 * 60 * 60 * -1, :second) |> DateTime.to_unix()
+ExOwm.get_historical_weather([%{lat: 52.374031, lon: 4.88969, dt: yesterday}])
+[{:ok, %{CITY_DATA}}]
+
 ```
 
 Please refer to official [docs](https://hexdocs.pm/ex_owm/readme.html) for more details.
