@@ -65,7 +65,7 @@ ExOwm.get_historical_weather([%{lat: 52.374031, lon: 4.88969, dt: yesterday}])
 
 Please refer to official [docs](https://hexdocs.pm/ex_owm/readme.html) for more details.
 
-## Overivew
+## Overview
 
 ExOwm is using cool features like:
 
