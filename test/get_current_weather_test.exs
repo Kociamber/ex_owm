@@ -58,7 +58,7 @@ defmodule GetCurrentWeatherTest do
     {:ok, map} = List.first(result)
     assert is_map(map)
     # check whether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Amsterdam"
+    assert Map.get(map, "name") == "Amsterdam" or "Gemeente Amsterdam"
   end
 
   test ": can get weather data with get_current_weather/1 by latitude and longitude" do
@@ -73,7 +73,7 @@ defmodule GetCurrentWeatherTest do
     {:ok, map} = List.first(result)
     assert is_map(map)
     # check whether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Amsterdam"
+    assert Map.get(map, "name") == "Amsterdam" or "Gemeente Amsterdam"
   end
 
   test ": can get weather data with get_current_weather/1 by zip and country code" do
@@ -136,7 +136,7 @@ defmodule GetCurrentWeatherTest do
     {:ok, map} = List.first(result)
     assert is_map(map)
     # check whether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Amsterdam"
+    assert Map.get(map, "name") == "Amsterdam" or "Gemeente Amsterdam"
   end
 
   test ": can get weather data with get_current_weather/1 by latitude and longitude with options" do
@@ -152,7 +152,7 @@ defmodule GetCurrentWeatherTest do
     {:ok, map} = List.first(result)
     assert is_map(map)
     # check whether map has specific keys to confirm that request was successful
-    assert Map.get(map, "name") == "Amsterdam"
+    assert Map.get(map, "name") == "Amsterdam" or "Gemeente Amsterdam"
   end
 
   test ": can get weather data with get_current_weather/1 by zip and country code with options" do
@@ -182,5 +182,4 @@ defmodule GetCurrentWeatherTest do
     assert result != []
     {:error, :not_found, %{"cod" => "404", "message" => "city not found"}} = List.first(result)
   end
-
 end

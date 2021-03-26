@@ -16,7 +16,9 @@ defmodule ExOwm.HistoricalWeather.Worker do
       # If location wasn't cached within last 10 minutes, call OWM API
       nil ->
         result = Api.send_and_parse_request(:get_historical_weather, location, opts)
-        Cache.put("historical_weather: #{inspect(location)}", result, ttl: :timer.minutes(10)) # TODO: can we increase this ttl based on the current time? Because it always returns the whole day.
+
+        # TODO: can we increase this ttl based on the current time? Because it always returns the whole day.
+        Cache.put("historical_weather: #{inspect(location)}", result, ttl: :timer.minutes(10))
         result
 
       # If location was cached, return it

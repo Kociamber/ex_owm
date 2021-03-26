@@ -46,9 +46,8 @@ defmodule ExOwm do
   @spec get_current_weather(requests, options) :: map
   def get_current_weather(loc, opts \\ [])
 
-  def get_current_weather(locations, opts) when is_list(locations) do
-    ExOwm.CurrentWeather.Coordinator.get_weather(locations, opts)
-  end
+  def get_current_weather(locations, opts) when is_list(locations),
+    do: ExOwm.CurrentWeather.Coordinator.get_weather(locations, opts)
 
   def get_current_weather(location, opts) when is_map(location),
     do: get_current_weather([location], opts)
@@ -64,13 +63,11 @@ defmodule ExOwm do
   @spec get_weather(requests, options) :: map
   def get_weather(loc, opts \\ [])
 
-  def get_weather(locations, opts) when is_list(locations) do
-    ExOwm.Weather.Coordinator.get_weather(locations, opts)
-  end
+  def get_weather(locations, opts) when is_list(locations),
+    do: ExOwm.Weather.Coordinator.get_weather(locations, opts)
 
   def get_weather(location, opts) when is_map(location),
-      do: get_weather([location], opts)
-
+    do: get_weather([location], opts)
 
   @doc """
   Gets 5 day forecast data of the given location with specified options.
@@ -83,9 +80,8 @@ defmodule ExOwm do
   @spec get_five_day_forecast(requests, options) :: map
   def get_five_day_forecast(locations, opts \\ [])
 
-  def get_five_day_forecast(locations, opts) when is_list(locations) do
-    ExOwm.FiveDayForecast.Coordinator.get_weather(locations, opts)
-  end
+  def get_five_day_forecast(locations, opts) when is_list(locations),
+    do: ExOwm.FiveDayForecast.Coordinator.get_weather(locations, opts)
 
   def get_five_day_forecast(location, opts) when is_map(location),
     do: get_five_day_forecast([location], opts)
@@ -101,9 +97,8 @@ defmodule ExOwm do
   @spec get_sixteen_day_forecast(requests, options) :: map
   def get_sixteen_day_forecast(locations, opts \\ [])
 
-  def get_sixteen_day_forecast(locations, opts) when is_list(locations) do
-    ExOwm.SixteenDayForecast.Coordinator.get_weather(locations, opts)
-  end
+  def get_sixteen_day_forecast(locations, opts) when is_list(locations),
+    do: ExOwm.SixteenDayForecast.Coordinator.get_weather(locations, opts)
 
   def get_sixteen_day_forecast(location, opts) when is_map(location),
     do: get_sixteen_day_forecast([location], opts)
@@ -120,11 +115,9 @@ defmodule ExOwm do
   @spec get_historical_weather(requests, options) :: map
   def get_historical_weather(loc, opts \\ [])
 
-  def get_historical_weather(locations, opts) when is_list(locations) do
-    ExOwm.HistoricalWeather.Coordinator.get_weather(locations, opts)
-  end
+  def get_historical_weather(locations, opts) when is_list(locations),
+    do: ExOwm.HistoricalWeather.Coordinator.get_weather(locations, opts)
 
   def get_historical_weather(location, opts) when is_map(location),
-      do: get_historical_weather([location], opts)
-
+    do: get_historical_weather([location], opts)
 end

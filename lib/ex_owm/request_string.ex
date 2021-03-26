@@ -56,7 +56,7 @@ defmodule ExOwm.RequestString do
 
   # Call by geo coordinates with datetime string
   defp add_location_substring({string, %{lat: lat, lon: lon, dt: dt}, opts}),
-       do: {string <> "?lat=#{lat}&lon=#{lon}&dt=#{dt}", opts}
+    do: {string <> "?lat=#{lat}&lon=#{lon}&dt=#{dt}", opts}
 
   # Call by geo coordinates
   defp add_location_substring({string, %{lat: lat, lon: lon}, opts}),

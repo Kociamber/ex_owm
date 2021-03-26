@@ -13,7 +13,8 @@ defmodule GetOneCallWeatherTest do
     {:ok, map} = List.first(result)
     assert is_map(map)
     # check whether map has specific keys to confirm that request was successful
-    assert Map.get(map, "current") |> Map.get("temp") > 200 # kelvin, we should be fine here
+    # kelvin, we should be fine here
+    assert Map.get(map, "current") |> Map.get("temp") > 200
   end
 
   test ": can get weather data with get_weather/1 by latitude and longitude with options" do
@@ -29,7 +30,8 @@ defmodule GetOneCallWeatherTest do
     {:ok, map} = List.first(result)
     assert is_map(map)
     # check whether map has specific keys to confirm that request was successful
-    assert Map.get(map, "current") |> Map.get("temp") < 100 # Celsius, we should be fine here
+    # Celsius, we should be fine here
+    assert Map.get(map, "current") |> Map.get("temp") < 100
   end
 
   test ": Parses errors correctly" do
@@ -43,5 +45,4 @@ defmodule GetOneCallWeatherTest do
     assert result != []
     {:error, :not_found, %{"cod" => "400", "message" => "wrong latitude"}} = List.first(result)
   end
-
 end

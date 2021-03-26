@@ -13,13 +13,13 @@ defmodule ExOwm.Supervisor do
   ## Server implementation
   def init(_) do
     children = [
-      worker(ExOwm.CurrentWeather.Coordinator, []),
-      worker(ExOwm.Weather.Coordinator, []),
-      worker(ExOwm.FiveDayForecast.Coordinator, []),
-      worker(ExOwm.SixteenDayForecast.Coordinator, []),
-      worker(ExOwm.HistoricalWeather.Coordinator, []),
+      ExOwm.CurrentWeather.Coordinator,
+      ExOwm.Weather.Coordinator,
+      ExOwm.FiveDayForecast.Coordinator,
+      ExOwm.SixteenDayForecast.Coordinator,
+      ExOwm.HistoricalWeather.Coordinator
     ]
 
-    supervise(children, strategy: :one_for_one)
+    Supervisor.init(children, strategy: :one_for_one)
   end
 end

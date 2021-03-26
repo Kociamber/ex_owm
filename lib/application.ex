@@ -3,12 +3,11 @@ defmodule ExOwm.Application do
   use Application
 
   def start(_type, _args) do
-    import Supervisor.Spec
     Logger.info("Starting supervision tree for #{inspect(__MODULE__)}")
 
     children = [
-      supervisor(ExOwm.Supervisor, []),
-      supervisor(ExOwm.Cache, []),
+      ExOwm.Supervisor,
+      ExOwm.Cache
     ]
 
     Supervisor.start_link(children, strategy: :one_for_one)
