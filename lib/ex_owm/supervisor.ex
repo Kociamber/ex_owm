@@ -16,7 +16,8 @@ defmodule ExOwm.Supervisor do
       worker(ExOwm.CurrentWeather.Coordinator, []),
       worker(ExOwm.Weather.Coordinator, []),
       worker(ExOwm.FiveDayForecast.Coordinator, []),
-      worker(ExOwm.SixteenDayForecast.Coordinator, [])
+      worker(ExOwm.SixteenDayForecast.Coordinator, []),
+      worker(ExOwm.HistoricalWeather.Coordinator, []),
     ]
 
     supervise(children, strategy: :one_for_one)

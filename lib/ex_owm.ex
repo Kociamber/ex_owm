@@ -14,6 +14,7 @@ defmodule ExOwm do
           | %{city: String.t(), country_code: String.t()}
           | %{id: integer()}
           | %{lat: float(), lon: float()}
+          | %{lat: float(), lon: float(), dt: integer()}
           | %{zip: String.t(), country_code: String.t()}
 
   @typedoc """
@@ -106,4 +107,24 @@ defmodule ExOwm do
 
   def get_sixteen_day_forecast(location, opts) when is_map(location),
     do: get_sixteen_day_forecast([location], opts)
+
+  @doc """
+  Gets historical weather data of the given location with specified options.
+  dt should be within the last 5 days.
+
+  ## Examples
+
+      iex> ExOwm.get_historical_weather([%{lat: 52.374031, lon: 4.88969, dt: 1615546800}], units: :metric, lang: :pl)
+
+  """
+  @spec get_historical_weather(requests, options) :: map
+  def get_historical_weather(loc, opts \\ [])
+
+  def get_historical_weather(locations, opts) when is_list(locations) do
+    ExOwm.HistoricalWeather.Coordinator.get_weather(locations, opts)
+  end
+
+  def get_historical_weather(location, opts) when is_map(location),
+      do: get_historical_weather([location], opts)
+
 end

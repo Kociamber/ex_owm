@@ -28,6 +28,7 @@ defmodule ExOwm.Api do
 
       {:ok, %HTTPoison.Response{status_code: 401, body: json_body}} ->
         {:error, :api_key_invalid, json_body}
+      error -> error
     end
   end
 
