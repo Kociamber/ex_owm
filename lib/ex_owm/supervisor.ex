@@ -16,6 +16,7 @@ defmodule ExOwm.Supervisor do
       ExOwm.CurrentWeather.Coordinator,
       ExOwm.Weather.Coordinator,
       ExOwm.FiveDayForecast.Coordinator,
+      ExOwm.HourlyForecast.Coordinator,
       ExOwm.SixteenDayForecast.Coordinator,
       ExOwm.HistoricalWeather.Coordinator
     ]

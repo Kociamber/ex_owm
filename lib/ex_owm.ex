@@ -87,6 +87,23 @@ defmodule ExOwm do
     do: get_five_day_forecast([location], opts)
 
   @doc """
+  Gets 4 day hourly forecast data of the given location with specified options.
+
+  ## Examples
+
+      iex> ExOwm.get_hourly_forecast([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl)
+  """
+  @spec get_hourly_forecast(requests, options) :: map
+  def get_hourly_forecast(locations, opts \\ [])
+
+  def get_hourly_forecast(locations, opts) when is_list(locations),
+      do: ExOwm.HourlyForecast.Coordinator.get_weather(locations, opts)
+
+  def get_hourly_forecast(location, opts) when is_map(location),
+      do: get_hourly_forecast([location], opts)
+
+
+  @doc """
   Gets 1 to 16 days forecast data of the given location with specified options.
 
   ## Examples

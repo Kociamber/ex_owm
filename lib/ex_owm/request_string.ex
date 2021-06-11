@@ -34,6 +34,10 @@ defmodule ExOwm.RequestString do
   defp add_prefix_substring({:get_five_day_forecast, location, opts}),
     do: {"api.openweathermap.org/data/2.5/forecast", location, opts}
 
+  # Four day hourly forecast call. https://openweathermap.org/api/hourly-forecast
+  defp add_prefix_substring({:get_hourly_forecast, location, opts}),
+       do: {"api.openweathermap.org/data/2.5/forecast/hourly", location, opts}
+
   # Sixteen day forecast call.
   defp add_prefix_substring({:get_sixteen_day_forecast, location, opts}),
     do: {"api.openweathermap.org/data/2.5/forecast/daily", location, opts}
