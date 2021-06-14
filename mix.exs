@@ -6,7 +6,7 @@ defmodule ExOwm.Mixfile do
     [
       app: :ex_owm,
       name: "ExOwm",
-      version: "1.2.3",
+      version: "1.2.4",
       description: "OpenWeatherMap API Elixir client.",
       source_url: @github_url,
       homepage_url: @github_url,
@@ -15,7 +15,7 @@ defmodule ExOwm.Mixfile do
         licenses: ["MIT"],
         links: %{"GitHub" => @github_url}
       ],
-      elixir: "~> 1.9",
+      elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       docs: [
