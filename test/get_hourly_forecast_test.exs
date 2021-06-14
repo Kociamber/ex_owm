@@ -99,6 +99,7 @@ defmodule GetHourlyForecastTest do
       |> Map.get("name")
 
     assert city_name == "Kolongo"
+    assert map |> Map.get("list") |> Enum.count() == 96
   end
 
   test ": can get weather data with get_hourly_forecast/1 by zip and country code" do
