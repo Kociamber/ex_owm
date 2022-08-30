@@ -12,16 +12,8 @@ defmodule ExOwm.HourlyForecast.Worker do
   """
   @spec get_hourly_forecast(map, key: atom) :: map
   def get_hourly_forecast(location, opts) do
-    case Cache.get("hourly_forecast: #{inspect(location)}") do
-      # If location wasn't cached within last 10 minutes, call OWM API
-      nil ->
-        result = Api.send_and_parse_request(:get_hourly_forecast, location, opts)
-        Cache.put("hourly_forecast: #{inspect(location)}", result, ttl: :timer.minutes(10))
-        result
-
-      # If location was cached, return it
-      location ->
-        location
-    end
+    ExOwm.WorkerHelper.get_from_cache_or_call("hourly_forecast: #{inspect(location)}", fn ->
+      Api.send_and_parse_request(:get_hourly_forecast, location, opts)
+    end)
   end
 end
