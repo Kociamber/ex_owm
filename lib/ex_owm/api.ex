@@ -36,4 +36,5 @@ defmodule ExOwm.Api do
 
   defp parse_json({:ok, json}), do: Jason.decode(json)
   defp parse_json({:error, reason, json_body}), do: {:error, reason, Jason.decode!(json_body)}
+  defp parse_json({:error, %HTTPoison.Error{} = reason}), do: {:error, reason}
 end
