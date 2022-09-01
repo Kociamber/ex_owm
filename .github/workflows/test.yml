@@ -25,6 +25,6 @@ jobs:
         run: mix deps.get --only test
 
       - name: mix test
-        run: mix test --include skip
+        run: mix test
         env:
           OWM_API_KEY: ${{ secrets.OWM_API_KEY }}
