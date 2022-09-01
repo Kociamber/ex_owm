@@ -40,3 +40,5 @@ jobs:
 
       - name: mix test
         run: mix test --include skip
+        env:
+          OWM_API_KEY: ${{ secrets.OWM_API_KEY }}
