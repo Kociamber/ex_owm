@@ -1,9 +1,9 @@
-name: Test and reformat elixir
+name: Test elixir
 on: push
 
 jobs:
   run:
-    name: Test and reformat elixir
+    name: Test elixir
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
