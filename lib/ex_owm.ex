@@ -97,11 +97,10 @@ defmodule ExOwm do
   def get_hourly_forecast(locations, opts \\ [])
 
   def get_hourly_forecast(locations, opts) when is_list(locations),
-      do: ExOwm.HourlyForecast.Coordinator.get_weather(locations, opts)
+    do: ExOwm.HourlyForecast.Coordinator.get_weather(locations, opts)
 
   def get_hourly_forecast(location, opts) when is_map(location),
-      do: get_hourly_forecast([location], opts)
-
+    do: get_hourly_forecast([location], opts)
 
   @doc """
   Gets 1 to 16 days forecast data of the given location with specified options.

@@ -1,0 +1,39 @@
+name: Reformat elixir
+on: push
+
+jobs:
+  run:
+    name: Reformat elixir
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - uses: actions/cache@v3
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+      - name: Setup elixir
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: 24.0
+          elixir-version: 1.13.4
+      - name: Install mix dependecies
+        run: mix deps.get
+
+      - name: Compile app (required for the formatter plugin)
+        run: mix compile
+
+      - name: Format with mix format
+        run: mix format
+
+      - name: Commit mix format code changes
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: "${{ github.event.pusher.name }}"
+          author_email: "${{ github.event.pusher.email }}"
+          message: 'Fix formatting of elixir code with mix format'
+          add: 'lib'
