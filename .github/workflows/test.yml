@@ -1,0 +1,30 @@
+name: Test and reformat elixir
+on: push
+
+jobs:
+  run:
+    name: Test and reformat elixir
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - uses: actions/cache@v3
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-mix-${{ hashFiles('**/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-
+      - name: Setup elixir
+        uses: erlef/setup-beam@v1
+        with:
+          otp-version: 24.0
+          elixir-version: 1.13.4
+      - name: Install mix dependecies
+        run: mix deps.get --only test
+
+      - name: mix test
+        run: mix test --include skip
+        env:
+          OWM_API_KEY: ${{ secrets.OWM_API_KEY }}

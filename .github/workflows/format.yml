@@ -1,9 +1,9 @@
-name: Test and reformat elixir
+name: Reformat elixir
 on: push
 
 jobs:
   run:
-    name: Test and reformat elixir
+    name: Reformat elixir
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
@@ -37,8 +37,3 @@ jobs:
           author_email: "${{ github.event.pusher.email }}"
           message: 'Fix formatting of elixir code with mix format'
           add: 'lib'
-
-      - name: mix test
-        run: mix test --include skip
-        env:
-          OWM_API_KEY: ${{ secrets.OWM_API_KEY }}
