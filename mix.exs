@@ -36,7 +36,7 @@ defmodule ExOwm.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:httpoison, "~> 1.7"},
+      {:httpoison, "~> 2.2"},
       {:jason, "~> 1.2"},
       {:nebulex, "~> 2.0"},
       {:shards, "~> 1.0"},
