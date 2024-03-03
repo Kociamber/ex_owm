@@ -1,4 +1,4 @@
-defmodule ExOwm.HistoricalWeather.Worker do
+defmodule ExOwm.HourlyForecast.Worker do
   @moduledoc """
   Five Day Forecast Worker task implementation.
   """
@@ -10,10 +10,10 @@ defmodule ExOwm.HistoricalWeather.Worker do
   Checks whether request has been already cached, if not it sends the request to
   OWM API and caches it with specific TTL.
   """
-  @spec get_historical_weather(map, key: atom) :: map
-  def get_historical_weather(location, opts) do
-    ExOwm.WorkerHelper.get_from_cache_or_call("historical_weather: #{inspect(location)}", fn ->
-      Api.send_and_parse_request(:get_historical_weather, location, opts)
+  @spec get_hourly_forecast(map, key: atom) :: map
+  def get_hourly_forecast(location, opts) do
+    ExOwm.WorkerHelper.get_from_cache_or_call("hourly_forecast: #{inspect(location)}", fn ->
+      Api.send_and_parse_request(:get_hourly_forecast, location, opts)
     end)
   end
 end

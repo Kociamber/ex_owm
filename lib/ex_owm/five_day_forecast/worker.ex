@@ -12,16 +12,8 @@ defmodule ExOwm.FiveDayForecast.Worker do
   """
   @spec get_five_day_forecast(map, key: atom) :: map
   def get_five_day_forecast(location, opts) do
-    case Cache.get("5_day_forecast: #{inspect(location)}") do
-      # If location wasn't cached within last 10 minutes, call OWM API
-      nil ->
-        result = Api.send_and_parse_request(:get_five_day_forecast, location, opts)
-        Cache.put("5_day_forecast: #{inspect(location)}", result, ttl: :timer.minutes(10))
-        result
-
-      # If location was cached, return it
-      location ->
-        location
-    end
+    ExOwm.WorkerHelper.get_from_cache_or_call("five_day_forecast: #{inspect(location)}", fn ->
+      Api.send_and_parse_request(:get_five_day_forecast, location, opts)
+    end)
   end
 end
