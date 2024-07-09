@@ -112,7 +112,8 @@ defmodule ExOwm.RequestString do
     case Keyword.has_key?(opts, :lang) do
       true ->
         lang =
-          Keyword.get(opts, :lang)
+          opts
+          |> Keyword.get(:lang)
           |> Atom.to_string()
 
         string <> "&lang=#{lang}"

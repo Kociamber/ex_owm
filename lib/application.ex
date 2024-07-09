@@ -1,4 +1,5 @@
 defmodule ExOwm.Application do
+  @moduledoc false
   require Logger
   use Application
 
