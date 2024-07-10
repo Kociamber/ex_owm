@@ -7,6 +7,7 @@ defmodule GetSixteenDayForecastTest do
     :ok
   end
 
+  @tag :api_based_test
   test "get_sixteen_day_forecast/1 with a city name" do
     result = ExOwm.get_sixteen_day_forecast(%{city: "Warsaw"})
 
@@ -25,6 +26,7 @@ defmodule GetSixteenDayForecastTest do
     assert city_name == "Warsaw"
   end
 
+  @tag :api_based_test
   test "get_sixteen_day_forecast/1 with a list of cities" do
     result = ExOwm.get_sixteen_day_forecast([%{city: "Warsaw"}])
 
@@ -43,6 +45,7 @@ defmodule GetSixteenDayForecastTest do
     assert city_name == "Warsaw"
   end
 
+  @tag :api_based_test
   test "get_sixteen_day_forecast/1 with a list of city names and country codes" do
     result = ExOwm.get_sixteen_day_forecast([%{city: "Warsaw", countr_code: "pl"}])
 
@@ -61,6 +64,7 @@ defmodule GetSixteenDayForecastTest do
     assert city_name == "Warsaw"
   end
 
+  @tag :api_based_test
   test "get_sixteen_day_forecast/1 with a list of city ids" do
     result = ExOwm.get_sixteen_day_forecast([%{id: 2_759_794}])
 
@@ -79,6 +83,7 @@ defmodule GetSixteenDayForecastTest do
     assert city_name == "Amsterdam"
   end
 
+  @tag :api_based_test
   test "get_sixteen_day_forecast/1 with a list of coordinates" do
     result = ExOwm.get_sixteen_day_forecast([%{lat: 52.374031, lon: 4.88969}])
 
@@ -97,6 +102,7 @@ defmodule GetSixteenDayForecastTest do
     assert city_name == "Amsterdam"
   end
 
+  @tag :api_based_test
   test "get_sixteen_day_forecast/1 with a list of zip does and country codes" do
     result = ExOwm.get_sixteen_day_forecast([%{zip: "94040", country_code: "us"}])
 
@@ -115,6 +121,7 @@ defmodule GetSixteenDayForecastTest do
     assert city_name == "Mountain View"
   end
 
+  @tag :api_based_test
   test "get_sixteen_day_forecast/1 with a list of city names and options" do
     result = ExOwm.get_sixteen_day_forecast([%{city: "Warsaw"}], units: :metric, lang: :pl)
 
@@ -133,6 +140,7 @@ defmodule GetSixteenDayForecastTest do
     assert city_name == "Warsaw"
   end
 
+  @tag :api_based_test
   test "get_sixteen_day_forecast/1 with a list of city names, country codes and options" do
     result =
       ExOwm.get_sixteen_day_forecast([%{city: "Warsaw", countr_code: "pl"}],
@@ -155,6 +163,7 @@ defmodule GetSixteenDayForecastTest do
     assert city_name == "Warsaw"
   end
 
+  @tag :api_based_test
   test "get_sixteen_day_forecast/1 with a list of city ids and options" do
     result = ExOwm.get_sixteen_day_forecast([%{id: 2_759_794}], units: :metric, lang: :pl)
 
@@ -173,6 +182,7 @@ defmodule GetSixteenDayForecastTest do
     assert city_name == "Amsterdam"
   end
 
+  @tag :api_based_test
   test "get_sixteen_day_forecast/1 with a list of coordinates and options" do
     result =
       ExOwm.get_sixteen_day_forecast([%{lat: 52.374031, lon: 4.88969}], units: :metric, lang: :pl)
@@ -192,6 +202,7 @@ defmodule GetSixteenDayForecastTest do
     assert city_name == "Amsterdam"
   end
 
+  @tag :api_based_test
   test "get_sixteen_day_forecast/1 with a list of zip codes, country codes and options" do
     result =
       ExOwm.get_sixteen_day_forecast([%{zip: "94040", country_code: "us"}],

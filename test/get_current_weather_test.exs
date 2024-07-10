@@ -7,7 +7,8 @@ defmodule GetCurrentWeatherTest do
     :ok
   end
 
-  test ":get_current_weather/1 with a city name" do
+  @tag :api_based_test
+  test "get_current_weather/1 with a city name" do
     result = ExOwm.get_current_weather(%{city: "Bengaluru"})
     assert result != []
 
@@ -17,7 +18,8 @@ defmodule GetCurrentWeatherTest do
     assert Map.get(map, "name") == "Bengaluru"
   end
 
-  test ":get_current_weather/1 with a list of cities" do
+  @tag :api_based_test
+  test "get_current_weather/1 with a list of cities" do
     result = ExOwm.get_current_weather([%{city: "Lucerne"}])
 
     assert is_list(result)
@@ -29,6 +31,7 @@ defmodule GetCurrentWeatherTest do
     assert Map.get(map, "name") == "Lucerne"
   end
 
+  @tag :api_based_test
   test "get_current_weather/1 with a city name and a country code" do
     result = ExOwm.get_current_weather([%{city: "Munich", countr_code: "de"}])
 
@@ -41,7 +44,8 @@ defmodule GetCurrentWeatherTest do
     assert Map.get(map, "name") == "Munich"
   end
 
-  test ":get_current_weather/1 with a city id" do
+  @tag :api_based_test
+  test "get_current_weather/1 with a city id" do
     result = ExOwm.get_current_weather([%{id: 2_759_794}])
 
     assert is_list(result)
@@ -52,6 +56,7 @@ defmodule GetCurrentWeatherTest do
     assert Map.get(map, "name") == "Amsterdam" or "Gemeente Amsterdam"
   end
 
+  @tag :api_based_test
   test "get_current_weather/1 with a latitude and a longitude" do
     result = ExOwm.get_current_weather([%{lat: 52.374031, lon: 4.88969}])
 
@@ -64,6 +69,7 @@ defmodule GetCurrentWeatherTest do
     assert Map.get(map, "name") == "Amsterdam" or "Gemeente Amsterdam"
   end
 
+  @tag :api_based_test
   test "get_current_weather/1 with a zip and a country code" do
     result = ExOwm.get_current_weather([%{zip: "94040", country_code: "us"}])
 
@@ -76,6 +82,7 @@ defmodule GetCurrentWeatherTest do
     assert Map.get(map, "name") == "Mountain View"
   end
 
+  @tag :api_based_test
   test "get_current_weather/1 with a city name and options" do
     city = %{city: "Warsaw"}
     options = [units: :metric, lang: :pl]
@@ -91,6 +98,7 @@ defmodule GetCurrentWeatherTest do
     assert Map.get(map, "name") == "Warszawa"
   end
 
+  @tag :api_based_test
   test "get_current_weather/1 with a city name and a country code and options" do
     city = %{city: "Warsaw", countr_code: "pl"}
     options = [units: :metric, lang: :pl]
@@ -106,6 +114,7 @@ defmodule GetCurrentWeatherTest do
     assert Map.get(map, "name") == "Warszawa"
   end
 
+  @tag :api_based_test
   test "get_current_weather/1 with a city id and options" do
     city = %{id: 2_759_794}
     options = [units: :metric, lang: :pl]
@@ -121,6 +130,7 @@ defmodule GetCurrentWeatherTest do
     assert Map.get(map, "name") == "Amsterdam" or "Gemeente Amsterdam"
   end
 
+  @tag :api_based_test
   test "get_current_weather/1 with a latitude and a longitude and options" do
     city = %{lat: 52.374031, lon: 4.88969}
     options = [units: :metric, lang: :pl]
@@ -136,6 +146,7 @@ defmodule GetCurrentWeatherTest do
     assert Map.get(map, "name") == "Amsterdam" or "Gemeente Amsterdam"
   end
 
+  @tag :api_based_test
   test "get_current_weather/1 with a zip code, a country code and options" do
     city = %{zip: "94040", country_code: "us"}
     options = [units: :metric, lang: :pl]
@@ -151,6 +162,7 @@ defmodule GetCurrentWeatherTest do
     assert Map.get(map, "name") == "Mountain View"
   end
 
+  @tag :api_based_test
   test "get_current_weather/1 with non-existing city" do
     result = ExOwm.get_current_weather(%{city: "Bonkersville"})
 

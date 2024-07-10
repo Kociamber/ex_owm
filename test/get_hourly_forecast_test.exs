@@ -7,6 +7,7 @@ defmodule GetHourlyForecastTest do
     :ok
   end
 
+  @tag :api_based_test
   test "get_hourly_forecast/1 with a city name" do
     result = ExOwm.get_hourly_forecast(%{city: "Sochi"})
 
@@ -25,6 +26,7 @@ defmodule GetHourlyForecastTest do
     assert city_name == "Sochi"
   end
 
+  @tag :api_based_test
   test "get_hourly_forecast/1 with a list of cities" do
     result = ExOwm.get_hourly_forecast([%{city: "Sochi"}])
 
@@ -43,6 +45,7 @@ defmodule GetHourlyForecastTest do
     assert city_name == "Sochi"
   end
 
+  @tag :api_based_test
   test "get_hourly_forecast/1 with a list of cities and country codes" do
     city = %{city: "Warsaw", countr_code: "pl"}
 
@@ -63,6 +66,7 @@ defmodule GetHourlyForecastTest do
     assert city_name == "Warsaw"
   end
 
+  @tag :api_based_test
   test "get_hourly_forecast/1 with a list of city ids" do
     result = ExOwm.get_hourly_forecast([%{id: 2_759_794}])
 
@@ -81,6 +85,7 @@ defmodule GetHourlyForecastTest do
     assert city_name == "Amsterdam"
   end
 
+  @tag :api_based_test
   test "get_hourly_forecast/1 with a list of coordinates" do
     result = ExOwm.get_hourly_forecast([%{lat: 4.3942822222, lon: 18.558442503}])
 
@@ -100,6 +105,7 @@ defmodule GetHourlyForecastTest do
     assert map |> Map.get("list") |> Enum.count() == 96
   end
 
+  @tag :api_based_test
   test "get_hourly_forecast/1 with a list of zip codes and country codes" do
     result = ExOwm.get_hourly_forecast([%{zip: "94040", country_code: "us"}])
 
@@ -118,6 +124,7 @@ defmodule GetHourlyForecastTest do
     assert city_name == "Mountain View"
   end
 
+  @tag :api_based_test
   test "get_hourly_forecast/1 with a list of cities and options" do
     result = ExOwm.get_hourly_forecast([%{city: "Zurich"}], units: :metric, lang: :ch)
 
@@ -136,6 +143,7 @@ defmodule GetHourlyForecastTest do
     assert city_name == "Zurich"
   end
 
+  @tag :api_based_test
   test "get_hourly_forecast/1 with a list of cities, country codes and options" do
     result =
       ExOwm.get_hourly_forecast([%{city: "Freiburg", countr_code: "ch"}],
@@ -160,6 +168,7 @@ defmodule GetHourlyForecastTest do
     assert %{"city" => %{"country" => "CH"}} = map
   end
 
+  @tag :api_based_test
   test "get_hourly_forecast/1 with a list of city ids and options" do
     result = ExOwm.get_hourly_forecast([%{id: 2_759_794}], units: :metric, lang: :pl)
 
@@ -178,6 +187,7 @@ defmodule GetHourlyForecastTest do
     assert city_name == "Amsterdam"
   end
 
+  @tag :api_based_test
   test "get_hourly_forecast/1 with a list of coordinates and options" do
     result =
       ExOwm.get_hourly_forecast([%{lat: 52.374031, lon: 4.88969}], units: :metric, lang: :pl)
@@ -197,6 +207,7 @@ defmodule GetHourlyForecastTest do
     assert city_name == "Amsterdam"
   end
 
+  @tag :api_based_test
   test "get_hourly_forecast/1 with a list of zip codes, country codes and options" do
     result =
       ExOwm.get_hourly_forecast([%{zip: "94040", country_code: "us"}], units: :metric, lang: :pl)

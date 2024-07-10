@@ -75,6 +75,10 @@ ExOwm utilizes some cool features such as:
 
 Each location entry in the list spawns a separate task (Elixir worker process) to check whether the request has been made within a specified time interval. If it has, the result is fetched from the cache. Otherwise, an API query is sent, the result is cached, and the data is returned.
 
+## Running local tests
+
+Since all the tests are based on OWM API calls, they are disabled by default. To enable them, please remove `:api_based_test` from the `test/test_helper.exs file`.
+
 ## To do
 
 *   Add remaining OWM APIs (including One Call API 3.0)

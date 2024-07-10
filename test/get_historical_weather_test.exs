@@ -7,6 +7,7 @@ defmodule GetHistoricalWeatherTest do
     :ok
   end
 
+  @tag :api_based_test
   test "get_historical_weather/1 with a list of latitudes and longitudes" do
     yesterday =
       DateTime.utc_now() |> DateTime.add(24 * 60 * 60 * -1, :second) |> DateTime.to_unix()
@@ -24,6 +25,7 @@ defmodule GetHistoricalWeatherTest do
     assert Map.get(map, "hourly") |> Enum.count() == 24
   end
 
+  @tag :api_based_test
   test "get_historical_weather/2 with a list of latitudes and longitudes and options" do
     yesterday =
       DateTime.utc_now() |> DateTime.add(24 * 60 * 60 * -1, :second) |> DateTime.to_unix()
@@ -46,6 +48,7 @@ defmodule GetHistoricalWeatherTest do
     assert Map.get(map, "hourly") |> List.first() |> Map.get("dt") < yesterday
   end
 
+  @tag :api_based_test
   test "get_historical_weather/2 with an incorrect coordinates" do
     city = %{lat: "15", lon: "-2", dt: -200}
 

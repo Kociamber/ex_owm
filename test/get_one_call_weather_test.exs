@@ -7,6 +7,7 @@ defmodule GetOneCallWeatherTest do
     :ok
   end
 
+  @tag :api_based_test
   test "get_weather/1 with a list of coordinates" do
     result = ExOwm.get_weather([%{lat: 52.374031, lon: 4.88969}])
 
@@ -20,6 +21,7 @@ defmodule GetOneCallWeatherTest do
     assert Map.get(map, "current") |> Map.get("temp") > 200
   end
 
+  @tag :api_based_test
   test "get_weather/1 with a list of coordinates and options" do
     city = %{lat: 46.514098, lon: 8.326755}
     options = [units: :metric, lang: :ru]
@@ -36,6 +38,7 @@ defmodule GetOneCallWeatherTest do
     assert Map.get(map, "current") |> Map.get("temp") < 100
   end
 
+  @tag :api_based_test
   test "get_weather/1 with an incorrect coordinates" do
     city = %{lat: "800", lon: "-2"}
 
