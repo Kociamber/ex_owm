@@ -1,7 +1,11 @@
 # ExOwm
 
-[![Build Status](https://travis-ci.org/Kociamber/ex_owm.svg?branch=master)](https://travis-ci.org/Kociamber/ex_owm)
-[![Hex version badge](https://img.shields.io/hexpm/v/ex_owm.svg)](https://hex.pm/packages/ex_owm)
+[![Module Version](https://img.shields.io/hexpm/v/ex_owm.svg)](https://hex.pm/packages/ex_owm)
+[![Hex Version](https://img.shields.io/hexpm/v/ex_owm.svg)](https://hex.pm/packages/ex_owm)
+[![Hex Docs](https://img.shields.io/badge/docs-hexpm-blue.svg)](https://hexdocs.pm/ex_owm/)
+[![License](https://img.shields.io/hexpm/l/ex_owm.svg)](https://github.com/kociamber/ex_owm/blob/master/LICENSE)
+[![Total Download](https://img.shields.io/hexpm/dt/ex_owm.svg)](https://hex.pm/packages/ex_owm)
+[![Last Updated](https://img.shields.io/github/last-commit/kociamber/ex_owm.svg)](https://github.com/kociamber/ex_owm/commits/master)
 
 **Fast [Open Weather Map](http://openweathermap.org/technology) API client for Elixir applications.**
 
