@@ -1,19 +1,22 @@
 defmodule GetSixteenDayForecastTest do
   use ExUnit.Case
 
-  @tag :skip
-  test ": can get weather data with get_sixteen_day_forecast/1 by single city name" do
-    # given
-    city = %{city: "Warsaw"}
-    # when
-    result = ExOwm.get_sixteen_day_forecast(city)
-    # then
-    # check whether a list of maps is returned
+  setup do
+    # Introduce a delay of 1 second between each test due to free API key restriction of 60 calls/minute
+    :timer.sleep(1000)
+    :ok
+  end
+
+  test "get_sixteen_day_forecast/1 with a city name" do
+    result = ExOwm.get_sixteen_day_forecast(%{city: "Warsaw"})
+
     assert is_list(result)
     assert result != []
+
     {:ok, map} = List.first(result)
+
     assert is_map(map)
-    # check whether map has specific value to confirm that request was successful
+
     city_name =
       map
       |> Map.get("city")
@@ -22,19 +25,16 @@ defmodule GetSixteenDayForecastTest do
     assert city_name == "Warsaw"
   end
 
-  @tag :skip
-  test ": can get weather data with get_sixteen_day_forecast/1 by city name" do
-    # given
-    city = %{city: "Warsaw"}
-    # when
-    result = ExOwm.get_sixteen_day_forecast([city])
-    # then
-    # check whether a list of maps is returned
+  test "get_sixteen_day_forecast/1 with a list of cities" do
+    result = ExOwm.get_sixteen_day_forecast([%{city: "Warsaw"}])
+
     assert is_list(result)
     assert result != []
+
     {:ok, map} = List.first(result)
+
     assert is_map(map)
-    # check whether map has specific value to confirm that request was successful
+
     city_name =
       map
       |> Map.get("city")
@@ -43,19 +43,16 @@ defmodule GetSixteenDayForecastTest do
     assert city_name == "Warsaw"
   end
 
-  @tag :skip
-  test ": can get weather data with get_sixteen_day_forecast/1 by city name and country code" do
-    # given
-    city = %{city: "Warsaw", countr_code: "pl"}
-    # when
-    result = ExOwm.get_sixteen_day_forecast([city])
-    # then
-    # check whether a list of maps is returned
+  test "get_sixteen_day_forecast/1 with a list of city names and country codes" do
+    result = ExOwm.get_sixteen_day_forecast([%{city: "Warsaw", countr_code: "pl"}])
+
     assert is_list(result)
     assert result != []
+
     {:ok, map} = List.first(result)
+
     assert is_map(map)
-    # check whether map has specific value to confirm that request was successful
+
     city_name =
       map
       |> Map.get("city")
@@ -64,19 +61,16 @@ defmodule GetSixteenDayForecastTest do
     assert city_name == "Warsaw"
   end
 
-  @tag :skip
-  test ": can get weather data with get_sixteen_day_forecast/1 by city id" do
-    # given
-    city = %{id: 2_759_794}
-    # when
-    result = ExOwm.get_sixteen_day_forecast([city])
-    # then
-    # check whether a list of maps is returned
+  test "get_sixteen_day_forecast/1 with a list of city ids" do
+    result = ExOwm.get_sixteen_day_forecast([%{id: 2_759_794}])
+
     assert is_list(result)
     assert result != []
+
     {:ok, map} = List.first(result)
+
     assert is_map(map)
-    # check whether map has specific value to confirm that request was successful
+
     city_name =
       map
       |> Map.get("city")
@@ -85,19 +79,16 @@ defmodule GetSixteenDayForecastTest do
     assert city_name == "Amsterdam"
   end
 
-  @tag :skip
-  test ": can get weather data with get_sixteen_day_forecast/1 by latitude and longitude" do
-    # given
-    city = %{lat: 52.374031, lon: 4.88969}
-    # when
-    result = ExOwm.get_sixteen_day_forecast([city])
-    # then
-    # check whether a list of maps is returned
+  test "get_sixteen_day_forecast/1 with a list of coordinates" do
+    result = ExOwm.get_sixteen_day_forecast([%{lat: 52.374031, lon: 4.88969}])
+
     assert is_list(result)
     assert result != []
+
     {:ok, map} = List.first(result)
+
     assert is_map(map)
-    # check whether map has specific value to confirm that request was successful
+
     city_name =
       map
       |> Map.get("city")
@@ -106,19 +97,16 @@ defmodule GetSixteenDayForecastTest do
     assert city_name == "Amsterdam"
   end
 
-  @tag :skip
-  test ": can get weather data with get_sixteen_day_forecast/1 by zip and country code" do
-    # given
-    city = %{zip: "94040", country_code: "us"}
-    # when
-    result = ExOwm.get_sixteen_day_forecast([city])
-    # then
-    # check whether a list of maps is returned
+  test "get_sixteen_day_forecast/1 with a list of zip does and country codes" do
+    result = ExOwm.get_sixteen_day_forecast([%{zip: "94040", country_code: "us"}])
+
     assert is_list(result)
     assert result != []
+
     {:ok, map} = List.first(result)
+
     assert is_map(map)
-    # check whether map has specific value to confirm that request was successful
+
     city_name =
       map
       |> Map.get("city")
@@ -127,20 +115,16 @@ defmodule GetSixteenDayForecastTest do
     assert city_name == "Mountain View"
   end
 
-  @tag :skip
-  test ": can get weather data with get_sixteen_day_forecast/1 by city name with options" do
-    # given
-    city = %{city: "Warsaw"}
-    options = [units: :metric, lang: :pl]
-    # when
-    result = ExOwm.get_sixteen_day_forecast([city], options)
-    # then
-    # check whether a list of maps is returned
+  test "get_sixteen_day_forecast/1 with a list of city names and options" do
+    result = ExOwm.get_sixteen_day_forecast([%{city: "Warsaw"}], units: :metric, lang: :pl)
+
     assert is_list(result)
     assert result != []
+
     {:ok, map} = List.first(result)
+
     assert is_map(map)
-    # check whether map has specific value to confirm that request was successful
+
     city_name =
       map
       |> Map.get("city")
@@ -149,20 +133,20 @@ defmodule GetSixteenDayForecastTest do
     assert city_name == "Warsaw"
   end
 
-  @tag :skip
-  test ": can get weather data with get_sixteen_day_forecast/1 by city name and country code with options" do
-    # given
-    city = %{city: "Warsaw", countr_code: "pl"}
-    options = [units: :metric, lang: :pl]
-    # when
-    result = ExOwm.get_sixteen_day_forecast([city], options)
-    # then
-    # check whether a list of maps is returned
+  test "get_sixteen_day_forecast/1 with a list of city names, country codes and options" do
+    result =
+      ExOwm.get_sixteen_day_forecast([%{city: "Warsaw", countr_code: "pl"}],
+        units: :metric,
+        lang: :pl
+      )
+
     assert is_list(result)
     assert result != []
+
     {:ok, map} = List.first(result)
+
     assert is_map(map)
-    # check whether map has specific value to confirm that request was successful
+
     city_name =
       map
       |> Map.get("city")
@@ -171,20 +155,16 @@ defmodule GetSixteenDayForecastTest do
     assert city_name == "Warsaw"
   end
 
-  @tag :skip
-  test ": can get weather data with get_sixteen_day_forecast/1 by city id with options" do
-    # given
-    city = %{id: 2_759_794}
-    options = [units: :metric, lang: :pl]
-    # when
-    result = ExOwm.get_sixteen_day_forecast([city], options)
-    # then
-    # check whether a list of maps is returned
+  test "get_sixteen_day_forecast/1 with a list of city ids and options" do
+    result = ExOwm.get_sixteen_day_forecast([%{id: 2_759_794}], units: :metric, lang: :pl)
+
     assert is_list(result)
     assert result != []
+
     {:ok, map} = List.first(result)
+
     assert is_map(map)
-    # check whether map has specific value to confirm that request was successful
+
     city_name =
       map
       |> Map.get("city")
@@ -193,20 +173,17 @@ defmodule GetSixteenDayForecastTest do
     assert city_name == "Amsterdam"
   end
 
-  @tag :skip
-  test ": can get weather data with get_sixteen_day_forecast/1 by latitude and longitude with options" do
-    # given
-    city = %{lat: 52.374031, lon: 4.88969}
-    options = [units: :metric, lang: :pl]
-    # when
-    result = ExOwm.get_sixteen_day_forecast([city], options)
-    # then
-    # check whether a list of maps is returned
+  test "get_sixteen_day_forecast/1 with a list of coordinates and options" do
+    result =
+      ExOwm.get_sixteen_day_forecast([%{lat: 52.374031, lon: 4.88969}], units: :metric, lang: :pl)
+
     assert is_list(result)
     assert result != []
+
     {:ok, map} = List.first(result)
+
     assert is_map(map)
-    # check whether map has specific value to confirm that request was successful
+
     city_name =
       map
       |> Map.get("city")
@@ -215,20 +192,20 @@ defmodule GetSixteenDayForecastTest do
     assert city_name == "Amsterdam"
   end
 
-  @tag :skip
-  test ": can get weather data with get_sixteen_day_forecast/1 by zip and country code with options" do
-    # given
-    city = %{zip: "94040", country_code: "us"}
-    options = [units: :metric, lang: :pl]
-    # when
-    result = ExOwm.get_sixteen_day_forecast([city], options)
-    # then
-    # check whether a list of maps is returned
+  test "get_sixteen_day_forecast/1 with a list of zip codes, country codes and options" do
+    result =
+      ExOwm.get_sixteen_day_forecast([%{zip: "94040", country_code: "us"}],
+        units: :metric,
+        lang: :pl
+      )
+
     assert is_list(result)
     assert result != []
+
     {:ok, map} = List.first(result)
+
     assert is_map(map)
-    # check whether map has specific value to confirm that request was successful
+
     city_name =
       map
       |> Map.get("city")

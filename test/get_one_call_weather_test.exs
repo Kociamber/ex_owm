@@ -1,46 +1,46 @@
 defmodule GetOneCallWeatherTest do
   use ExUnit.Case
 
-  test ": can get one call weather data by latitude and longitude" do
-    # given
-    city = %{lat: 52.374031, lon: 4.88969}
-    # when
-    result = ExOwm.get_weather([city])
-    # then
-    # check whether a list of maps is returned
+  setup do
+    # Introduce a delay of 1 second between each test due to free API key restriction of 60 calls/minute
+    :timer.sleep(1000)
+    :ok
+  end
+
+  test "get_weather/1 with a list of coordinates" do
+    result = ExOwm.get_weather([%{lat: 52.374031, lon: 4.88969}])
+
     assert is_list(result)
     assert result != []
+
     {:ok, map} = List.first(result)
+
     assert is_map(map)
-    # check whether map has specific keys to confirm that request was successful
     # kelvin, we should be fine here
     assert Map.get(map, "current") |> Map.get("temp") > 200
   end
 
-  test ": can get weather data with get_weather/1 by latitude and longitude with options" do
-    # given
+  test "get_weather/1 with a list of coordinates and options" do
     city = %{lat: 46.514098, lon: 8.326755}
     options = [units: :metric, lang: :ru]
-    # when
+
     result = ExOwm.get_weather([city], options)
-    # then
-    # check whether a list of maps is returned
+
     assert is_list(result)
     assert result != []
+
     {:ok, map} = List.first(result)
+
     assert is_map(map)
-    # check whether map has specific keys to confirm that request was successful
     # Celsius, we should be fine here
     assert Map.get(map, "current") |> Map.get("temp") < 100
   end
 
-  test ": Parses errors correctly" do
-    # given
+  test "get_weather/1 with an incorrect coordinates" do
     city = %{lat: "800", lon: "-2"}
-    # when
+
     result = ExOwm.get_weather(city)
-    # then
-    # check whether a list of maps is returned
+
     assert is_list(result)
     assert result != []
     {:error, :not_found, %{"cod" => "400", "message" => "wrong latitude"}} = List.first(result)
