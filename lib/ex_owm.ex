@@ -1,4 +1,13 @@
 defmodule ExOwm do
+  alias ExOwm.{
+    Weather,
+    CurrentWeather,
+    FiveDayForecast,
+    HourlyForecast,
+    SixteenDayForecast,
+    HistoricalWeather
+  }
+
   require Logger
 
   @moduledoc """
@@ -47,7 +56,7 @@ defmodule ExOwm do
   def get_current_weather(loc, opts \\ [])
 
   def get_current_weather(locations, opts) when is_list(locations),
-    do: ExOwm.CurrentWeather.Coordinator.get_weather(locations, opts)
+    do: CurrentWeather.Coordinator.get_weather(locations, opts)
 
   def get_current_weather(location, opts) when is_map(location),
     do: get_current_weather([location], opts)
@@ -64,7 +73,7 @@ defmodule ExOwm do
   def get_weather(loc, opts \\ [])
 
   def get_weather(locations, opts) when is_list(locations),
-    do: ExOwm.Weather.Coordinator.get_weather(locations, opts)
+    do: Weather.Coordinator.get_weather(locations, opts)
 
   def get_weather(location, opts) when is_map(location),
     do: get_weather([location], opts)
@@ -81,7 +90,7 @@ defmodule ExOwm do
   def get_five_day_forecast(locations, opts \\ [])
 
   def get_five_day_forecast(locations, opts) when is_list(locations),
-    do: ExOwm.FiveDayForecast.Coordinator.get_weather(locations, opts)
+    do: FiveDayForecast.Coordinator.get_weather(locations, opts)
 
   def get_five_day_forecast(location, opts) when is_map(location),
     do: get_five_day_forecast([location], opts)
@@ -97,7 +106,7 @@ defmodule ExOwm do
   def get_hourly_forecast(locations, opts \\ [])
 
   def get_hourly_forecast(locations, opts) when is_list(locations),
-    do: ExOwm.HourlyForecast.Coordinator.get_weather(locations, opts)
+    do: HourlyForecast.Coordinator.get_weather(locations, opts)
 
   def get_hourly_forecast(location, opts) when is_map(location),
     do: get_hourly_forecast([location], opts)
@@ -114,7 +123,7 @@ defmodule ExOwm do
   def get_sixteen_day_forecast(locations, opts \\ [])
 
   def get_sixteen_day_forecast(locations, opts) when is_list(locations),
-    do: ExOwm.SixteenDayForecast.Coordinator.get_weather(locations, opts)
+    do: SixteenDayForecast.Coordinator.get_weather(locations, opts)
 
   def get_sixteen_day_forecast(location, opts) when is_map(location),
     do: get_sixteen_day_forecast([location], opts)
@@ -132,7 +141,7 @@ defmodule ExOwm do
   def get_historical_weather(loc, opts \\ [])
 
   def get_historical_weather(locations, opts) when is_list(locations),
-    do: ExOwm.HistoricalWeather.Coordinator.get_weather(locations, opts)
+    do: HistoricalWeather.Coordinator.get_weather(locations, opts)
 
   def get_historical_weather(location, opts) when is_map(location),
     do: get_historical_weather([location], opts)

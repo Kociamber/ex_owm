@@ -1,21 +1,23 @@
 defmodule GetHistoricalWeatherTest do
   use ExUnit.Case
 
-  test ": can get historical one call weather data by latitude and longitude" do
-    # given
+  setup do
+    # Introduce a delay of 1 second between each test due to free API key restriction of 60 calls/minute
+    :timer.sleep(1000)
+    :ok
+  end
+
+  @tag :api_based_test
+  test "get_historical_weather/1 with a list of latitudes and longitudes" do
     yesterday =
       DateTime.utc_now() |> DateTime.add(24 * 60 * 60 * -1, :second) |> DateTime.to_unix()
 
-    city = %{lat: 52.374031, lon: 4.88969, dt: yesterday}
-    # when
-    result = ExOwm.get_historical_weather([city])
-    # then
-    # check whether a list of maps is returned
+    result = ExOwm.get_historical_weather([%{lat: 52.374031, lon: 4.88969, dt: yesterday}])
+
     assert is_list(result)
     assert result != []
     {:ok, map} = List.first(result)
     assert is_map(map)
-    # check whether map has specific keys to confirm that request was successful
     # kelvin, we should be fine here
     assert Map.get(map, "current") |> Map.get("temp") > 200
     # The first entry should be smaller than what we asked for because it's midnight.
@@ -23,34 +25,35 @@ defmodule GetHistoricalWeatherTest do
     assert Map.get(map, "hourly") |> Enum.count() == 24
   end
 
-  test ": can get historical weather data with get_historical_weather/2 by latitude and longitude with options" do
-    # given
+  @tag :api_based_test
+  test "get_historical_weather/2 with a list of latitudes and longitudes and options" do
     yesterday =
       DateTime.utc_now() |> DateTime.add(24 * 60 * 60 * -1, :second) |> DateTime.to_unix()
 
-    city = %{lat: 46.514098, lon: 8.326755, dt: yesterday}
-    options = [units: :metric, lang: :de]
-    # when
-    result = ExOwm.get_historical_weather([city], options)
-    # then
-    # check whether a list of maps is returned
+    result =
+      ExOwm.get_historical_weather([%{lat: 46.514098, lon: 8.326755, dt: yesterday}],
+        units: :metric,
+        lang: :de
+      )
+
     assert is_list(result)
     assert result != []
+
     {:ok, map} = List.first(result)
+
     assert is_map(map)
-    # check whether map has specific keys to confirm that request was successful
     # Celsius, we should be fine here
     assert Map.get(map, "current") |> Map.get("temp") < 100
     # The first entry should be smaller than what we asked for because it's midnight.
     assert Map.get(map, "hourly") |> List.first() |> Map.get("dt") < yesterday
   end
 
-  test ": Parses errors correctly" do
-    # given
+  @tag :api_based_test
+  test "get_historical_weather/2 with an incorrect coordinates" do
     city = %{lat: "15", lon: "-2", dt: -200}
-    # when
+
     result = ExOwm.get_historical_weather(city)
-    # then
+
     # check whether a list of maps is returned
     assert is_list(result)
     assert result != []

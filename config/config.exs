@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 config :logger, level: :info
 config :ex_owm, api_key: System.get_env("OWM_API_KEY")
 

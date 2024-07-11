@@ -1,9 +1,13 @@
 # ExOwm
 
-[![Build Status](https://travis-ci.org/Kociamber/ex_owm.svg?branch=master)](https://travis-ci.org/Kociamber/ex_owm)
-[![Hex version badge](https://img.shields.io/hexpm/v/ex_owm.svg)](https://hex.pm/packages/ex_owm)
+[![Module Version](https://img.shields.io/hexpm/v/ex_owm.svg)](https://hex.pm/packages/ex_owm)
+[![Hex Version](https://img.shields.io/hexpm/v/ex_owm.svg)](https://hex.pm/packages/ex_owm)
+[![Hex Docs](https://img.shields.io/badge/docs-hexpm-blue.svg)](https://hexdocs.pm/ex_owm/)
+[![License](https://img.shields.io/hexpm/l/ex_owm.svg)](https://github.com/kociamber/ex_owm/blob/master/LICENSE)
+[![Total Download](https://img.shields.io/hexpm/dt/ex_owm.svg)](https://hex.pm/packages/ex_owm)
+[![Last Updated](https://img.shields.io/github/last-commit/kociamber/ex_owm.svg)](https://github.com/kociamber/ex_owm/commits/master)
 
-**Fast, industrial strength [Open Weather Map](http://openweathermap.org/technology) interface for Elixir platforms.**
+**Fast [Open Weather Map](http://openweathermap.org/technology) API client for Elixir applications.**
 
 ## Installation
 
@@ -11,20 +15,19 @@ Add ExOwm as a dependency to your `mix.exs` file:
 
 ```elixir
 defp deps() do
-  [{:ex_owm, "~> 1.2.3"}]
+  [{:ex_owm, "~> 1.3.0"}]
 end
 ```
 
 ## Upgrade from 1.0.X
 
-**Please re-factor** your configuration and paste below one once again as module naming (specifically the order) has slightly changed!
+**Please re-factor** your configuration as the module naming (specifically the order) has slightly changed. Use the configuration below:
 
 ## Configuration
 
-In order to be able to use OWM APIs, you need to [register](https://home.openweathermap.org/users/sign_up) free account and get free API KEY.
-After obtaining the key, please set environmental variable called OWM_API_KEY and set the value to your API KEY.
+To use OWM APIs, you need to [register](https://home.openweathermap.org/users/sign_up) for an account (free plan is available) and obtain an API key. After obtaining the key, set the environment variable OWM_API_KEY to your API key.
 
-If you are going to use this application as a dependency in your own project, you will need to copy and paste below configuration to your `config/config.exs` file:
+If you are using this application as a dependency in your project, add the following configuration to your `config/config.exs` file:
 
 ```elixir
 config :ex_owm, api_key: System.get_env("OWM_API_KEY")
@@ -34,7 +37,7 @@ config :ex_owm, api_key: System.get_env("OWM_API_KEY")
 
 ## Basic Usage
 
-ExOwm is currently handling the following main OpenWeatherMap [APIs](http://openweathermap.org/api):
+ExOwm currently handles the following main OpenWeatherMap [APIs](http://openweathermap.org/api):
 
 *   [Current weather data](http://openweathermap.org/current)
 *   [One Call API](https://openweathermap.org/api/one-call-api)
@@ -42,11 +45,12 @@ ExOwm is currently handling the following main OpenWeatherMap [APIs](http://open
 *   [5 day / 3 hour forecast](http://openweathermap.org/forecast5)
 *   [1 - 16 day / daily forecast](http://openweathermap.org/forecast16)
 
-Please note that with standard (free) license / API key you may be limited with amount of requests per minute and may not be able to access 1 - 16 day / daily forecast. Please refer to OpenWeatherMap license [plans](http://openweathermap.org/price).
+Please note that with a standard (free) license/API key, you may be limited in the number of requests per minute and may not have access to the 1 - 16 day/daily forecast. Please refer to OpenWeatherMap [pricing plans](http://openweathermap.org/price) for more details..
 
-There are three main public interface functions for each API and they accepts the same set of two params - a list of location maps and a keyword list of options.
+There are three main public interface functions for each API, accepting the same set of two parameters: a list of location maps and a keyword list of options.
 
-Sample API calls may look following:
+Sample API calls:
+
 ```elixir
 ExOwm.get_current_weather([%{city: "Warsaw"}, %{city: "London", country_code: "uk"}], units: :metric, lang: :pl)
 [{:ok, %{WARSAW_DATA}}, {:ok, %{LONDON_DATA}}]
@@ -63,21 +67,25 @@ ExOwm.get_historical_weather([%{lat: 52.374031, lon: 4.88969, dt: yesterday}])
 
 ```
 
-Please refer to official [docs](https://hexdocs.pm/ex_owm/readme.html) for more details.
+For more details, refer to the official [docs](https://hexdocs.pm/ex_owm/readme.html).
 
 ## Overview
 
-ExOwm is using cool features like:
+ExOwm utilizes some cool features such as:
 
 *   concurrent API calls
 *   super fast generational caching
 *   access to **main** [OWM APIs](http://openweathermap.org/api)!
 
-It means that each location entry passed within the list spawns separate task (Elixir worker process) which is checking whether the request has been already sent within a time interval, if yes, it's fetching the result from cache. Otherwise it sends API query, saves the result in cache and returns the data.
+Each location entry in the list spawns a separate task (Elixir worker process) to check whether the request has been made within a specified time interval. If it has, the result is fetched from the cache. Otherwise, an API query is sent, the result is cached, and the data is returned.
+
+## Running local tests
+
+Since all the tests are based on OWM API calls, they are disabled by default. To enable them, please remove `:api_based_test` from the `test/test_helper.exs file`.
 
 ## To do
 
-*   Add Historical Data API
+*   Add remaining OWM APIs (including One Call API 3.0)
 
 ## License
 
