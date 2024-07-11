@@ -1,6 +1,5 @@
 # ExOwm
 
-[![Module Version](https://img.shields.io/hexpm/v/ex_owm.svg)](https://hex.pm/packages/ex_owm)
 [![Hex Version](https://img.shields.io/hexpm/v/ex_owm.svg)](https://hex.pm/packages/ex_owm)
 [![Hex Docs](https://img.shields.io/badge/docs-hexpm-blue.svg)](https://hexdocs.pm/ex_owm/)
 [![License](https://img.shields.io/hexpm/l/ex_owm.svg)](https://github.com/kociamber/ex_owm/blob/master/LICENSE)
