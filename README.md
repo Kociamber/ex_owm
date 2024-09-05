@@ -14,7 +14,9 @@ Add ExOwm as a dependency to your `mix.exs` file:
 
 ```elixir
 defp deps() do
-  [{:ex_owm, "~> 1.3.0"}]
+  [
+    {:ex_owm, "~> 1.3.1"}
+  ]
 end
 ```
 
