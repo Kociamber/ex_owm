@@ -6,7 +6,7 @@ defmodule ExOwm.Mixfile do
     [
       app: :ex_owm,
       name: "ExOwm",
-      version: "1.3.0",
+      version: "1.3.1",
       description: "OpenWeatherMap API Elixir client.",
       source_url: @github_url,
       homepage_url: @github_url,
@@ -32,7 +32,7 @@ defmodule ExOwm.Mixfile do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger, :wx, :observer, :runtime_tools],
+      extra_applications: [:logger, :runtime_tools],
       mod: {ExOwm.Application, []}
     ]
   end
