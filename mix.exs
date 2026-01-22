@@ -6,7 +6,8 @@ defmodule ExOwm.Mixfile do
     [
       app: :ex_owm,
       name: "ExOwm",
-      version: "1.3.1",
+      version: "2.0.0",
+      elixir: "~> 1.17",
       description: "OpenWeatherMap API Elixir client.",
       source_url: @github_url,
       homepage_url: @github_url,
@@ -24,7 +25,7 @@ defmodule ExOwm.Mixfile do
       deps: deps(),
       docs: [
         main: "readme",
-        extras: ["README.md"]
+        extras: ["README.md", "CHANGELOG.md", "UPGRADE.md"]
       ]
     ]
   end
@@ -40,13 +41,16 @@ defmodule ExOwm.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:bypass, "~> 2.1", only: :test},
+      {:credo, "~> 1.7.15", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.4", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.31", only: :dev, runtime: false},
-      {:httpoison, "~> 2.0"},
       {:jason, "~> 1.4"},
+      {:mox, "~> 1.0", only: :test},
       {:nebulex, "~> 2.6"},
-      {:shards, "~> 1.1"}
+      {:req, "~> 0.5"},
+      {:shards, "~> 1.1"},
+      {:telemetry, "~> 1.0"}
     ]
   end
 end

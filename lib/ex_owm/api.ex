@@ -1,65 +1,70 @@
 defmodule ExOwm.Api do
   @moduledoc """
   This module contains functions for interacting with the OpenWeatherMap API.
-  It prepares request strings, makes API calls, and parses the responses.
+  It builds request URLs, makes API calls using Req, and parses responses.
   """
-  alias ExOwm.RequestString
-  alias HTTPoison.{Error, Response}
+  alias ExOwm.{RequestURL, Location}
 
   @doc """
-  Prepares a request string based on the given parameters, calls the OWM API,
+  Builds a request URL based on the given parameters, calls the OWM API,
   and parses the JSON response.
 
   ## Parameters
 
     - `api_call_type` (atom): The type of API call (e.g., `:get_weather`, `:get_current_weather`).
-    - `location` (map): The location parameters (e.g., city, coordinates, zip code).
-    - `opts` (term): Optional parameters for the API call (e.g., type, mode, units, cnt, lang).
+    - `location` (%ExOwm.Location{}): The location struct.
+    - `opts` (keyword): Optional parameters for the API call (e.g., type, mode, units, cnt, lang).
 
   ## Returns
 
-    - (map): The parsed JSON response.
+    - `{:ok, map}`: The parsed JSON response.
+    - `{:error, term}`: An error atom.
     - `{:error, term, term}`: An error tuple containing the error type and the response.
   """
-  @spec send_and_parse_request(atom, map, term) :: map | {:error, term, term}
-  def send_and_parse_request(api_call_type, location, opts) do
+  @spec send_and_parse_request(atom, Location.t(), keyword) ::
+          {:ok, map} | {:error, term} | {:error, term, term}
+  def send_and_parse_request(api_call_type, %Location{} = location, opts) do
     api_call_type
-    |> RequestString.build(location, opts)
+    |> RequestURL.build_url(location, opts)
     |> call_api()
-    |> parse_response()
   end
 
-  @spec call_api(String.t()) :: {:ok, String.t()} | {:error, atom, term} | {:error, term}
+  @spec call_api(String.t()) :: {:ok, map} | {:error, term} | {:error, term, term}
   defp call_api(url) do
-    case HTTPoison.get(url) do
-      {:ok, %Response{status_code: 200, body: json_body}} ->
-        {:ok, json_body}
+    case Req.get(url) do
+      {:ok, %Req.Response{status: 200} = response} ->
+        handle_success_response(response)
 
-      {:ok, %Response{status_code: 404, body: json_body}} ->
-        {:error, :not_found, json_body}
+      {:ok, %Req.Response{status: status, body: body}} when status in [400, 401, 404] ->
+        handle_error_response(status, body)
 
-      {:ok, %Response{status_code: 400, body: json_body}} ->
-        {:error, :bad_request, json_body}
+      {:ok, %Req.Response{status: status} = response} ->
+        {:error, :unknown_api_response, %{status: status, response: response}}
 
-      {:ok, %Response{status_code: 401, body: json_body}} ->
-        {:error, :api_key_invalid, json_body}
-
-      {:ok, response} ->
-        {:error, :unknown_api_response, response}
-
-      {:error, %Error{} = reason} ->
-        {:error, reason}
+      {:error, exception} ->
+        {:error, exception}
     end
   end
 
-  @spec parse_response({:ok, String.t()} | {:error, atom, String.t()} | {:error, term}) ::
-          map | {:error, term, term}
-  defp parse_response({:ok, json}), do: Jason.decode(json)
+  defp handle_success_response(%Req.Response{body: body}) when is_map(body), do: {:ok, body}
 
-  defp parse_response({:error, :unknown_api_response, response}),
-    do: {:error, :unknown_api_response, response}
+  defp handle_success_response(%Req.Response{body: body}) when is_binary(body) do
+    case Jason.decode(body) do
+      {:ok, decoded} -> {:ok, decoded}
+      {:error, reason} -> {:error, {:json_decode_error, reason}}
+    end
+  end
 
-  defp parse_response({:error, reason, json_body}), do: {:error, reason, Jason.decode(json_body)}
+  defp handle_error_response(404, body), do: {:error, :not_found, parse_error_body(body)}
+  defp handle_error_response(400, body), do: {:error, :bad_request, parse_error_body(body)}
+  defp handle_error_response(401, body), do: {:error, :api_key_invalid, parse_error_body(body)}
 
-  defp parse_response({:error, %Error{} = reason}), do: {:error, reason}
+  defp parse_error_body(body) when is_map(body), do: body
+
+  defp parse_error_body(body) when is_binary(body) do
+    case Jason.decode(body) do
+      {:ok, decoded} -> decoded
+      {:error, _} -> %{"error" => body}
+    end
+  end
 end

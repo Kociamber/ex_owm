@@ -1,16 +1,19 @@
 defmodule ExOwm.Application do
   @moduledoc false
-  require Logger
   use Application
 
   def start(_type, _args) do
-    Logger.info("Starting supervision tree for #{inspect(__MODULE__)}")
+    children =
+      if cache_enabled?() do
+        [ExOwm.Cache]
+      else
+        []
+      end
 
-    children = [
-      ExOwm.Supervisor,
-      ExOwm.Cache
-    ]
+    Supervisor.start_link(children, strategy: :one_for_one, name: ExOwm.Supervisor)
+  end
 
-    Supervisor.start_link(children, strategy: :one_for_one)
+  defp cache_enabled? do
+    Application.get_env(:ex_owm, :cache_enabled, true)
   end
 end
