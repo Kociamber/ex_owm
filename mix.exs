@@ -47,7 +47,7 @@ defmodule ExOwm.Mixfile do
       {:ex_doc, "~> 0.31", only: :dev, runtime: false},
       {:jason, "~> 1.4"},
       {:mox, "~> 1.0", only: :test},
-      {:nebulex, "~> 2.6"},
+      {:nebulex, "~> 3.0"},
       {:req, "~> 0.5"},
       {:shards, "~> 1.1"},
       {:telemetry, "~> 1.0"}
